@@ -40,10 +40,12 @@ your branch and ease of conflict resolve.
 Github Desktop General Usage Guide:
 
 Creating new branch from master:  
-1. Created your branch first, name it whatever you like.
-2. Switch over to your branch.
-3. Pull from master.
-4. Work on your branch.
+1. Clone repository
+2. Create your branch first, name it whatever you like.
+3. Switch over to your branch.
+4. (Optional, if you just clone from a fresh master, no need to pull)  
+Pull from master.
+5. Work on your branch.
 
 Merging your branch into master:  
 1. Commit your work, remember to comment usage messages.
