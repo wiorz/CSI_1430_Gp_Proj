@@ -1,6 +1,0 @@
-#ifndef CANNON_H_INCLUDED
-#define CANNON_H_INCLUDED
-
-
-
-#endif // CANNON_H_INCLUDED

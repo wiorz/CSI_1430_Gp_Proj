@@ -9,3 +9,6 @@ compile_commands.json
 CTestTestfile.cmake
 GroupProj.cbp
 GroupProj.layout
+bin/
+obj/classNotes
+.o
