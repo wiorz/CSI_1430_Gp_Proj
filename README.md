@@ -25,8 +25,15 @@ https://rogerdudler.github.io/git-guide/
 On gitignore and other commands:  
 https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
-On merging:
+On merging:  
 https://dev.to/neshaz/how-to-use-git-merge-the-correctway-25pd  
+
+Detailed command line approach:  
+https://gist.github.com/colinsurprenant/9b081958b50cfecc210c
+
+Note: It's easier to use the apps, like GH Desktop or GitKraken, mainly  
+for the simple QoL functions such as that bringing the changes over to  
+your branch and ease of conflict resolve.
 
 -----------------------------------------
 
@@ -51,13 +58,13 @@ Merging your branch into master:
 	   2. Swtich to Master  
 	   3. Select "Choose a branch to merge into Master"  
 
-	Note: yes, you'd need to switch back and forth to your branch and 
-	master many times if you have lots of small updates.
+	Note: yes, you'd need to switch back and forth to your branch and    
+	master every time.
 
 6. Push to origin to Master
 
 7. Don't forget to switch back to your branch!!!
 
-Note: Always select "Bring my changes to ***[your branch]***" when 
-switching branches. 
+Note: Always select "Bring my changes to *[your branch]*" when 
+switching branches.  
 And ALWAYS commit and update your branch first!
