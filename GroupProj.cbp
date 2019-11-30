@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="20191111" />
+		<Option execution_dir="C:/Users/koesl/Documents/Code/CSI1430/GroupProj/" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/20191111" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/20191111" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="../classNotes/20191111Mon/20191111/SDL_Plotter.cpp" />
+		<Unit filename="../classNotes/20191111Mon/20191111/SDL_Plotter.h" />
+		<Unit filename="../classNotes/20191111Mon/20191111/circle.cpp" />
+		<Unit filename="../classNotes/20191111Mon/20191111/circle.h" />
+		<Unit filename="../classNotes/20191111Mon/20191111/color.h" />
+		<Unit filename="../classNotes/20191111Mon/20191111/line.cpp" />
+		<Unit filename="../classNotes/20191111Mon/20191111/line.h" />
+		<Unit filename="../classNotes/20191111Mon/20191111/main.cpp" />
+		<Unit filename="../classNotes/20191111Mon/20191111/point.cpp" />
+		<Unit filename="../classNotes/20191111Mon/20191111/point.h" />
+		<Unit filename="../classNotes/20191111Mon/20191111/rectangle.cpp" />
+		<Unit filename="../classNotes/20191111Mon/20191111/rectangle.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
