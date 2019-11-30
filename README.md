@@ -15,3 +15,38 @@ Note: using apps like gitkraken or githubDesktop will make viewing and commiting
 5. Clean up your own shit.
 
 EX: Anyone that breaks master will have to buy everyone else a meal.
+
+-----------------------------------------
+Git tutorial:
+(Also has gitignore topics)
+https://www.atlassian.com/git/tutorials/saving-changes/gitignore
+
+-----------------------------------------
+
+Github Desktop General Usage Guide:
+
+Creating new branch from master:
+1. Created your branch first, name it whatever you like.
+2. Switch over to your branch.
+3. Pull from master.
+4. Work on your branch.
+
+Merging your branch into master:
+1. Commit your work, remember to comment usage messages.
+2. Push to YOUR branch.
+3. Switch over to Master.
+4. Your can use a) the option tabs or b) the drop down menu
+	a) 1. Click "Branch"
+	   2. Select "Merge into current branch"
+	   3. Click your branch
+	b) 1. Click the drop down arrow on Current branch
+	   2. Swtich to Master
+	   3. Select "Choose a branch to merge into Master"
+
+	Note: yes, you'd need to switch back and forth to your branch and 
+	master many times if you have lots of small updates.
+
+5. Don't forget to switch back to your branch!!!
+
+Note: Always select "Bring my changes to ***[your branch]***" when 
+switching branches. And ALWAYS commit and update your branch first!
