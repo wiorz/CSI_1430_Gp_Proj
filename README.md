@@ -33,7 +33,7 @@ Creating new branch from master:
 
 Merging your branch into master:
 1. Commit your work, remember to comment usage messages.
-2. Push to YOUR branch.
+2. Push origin to YOUR branch.
 3. Switch over to Master.
 4. Your can use a) the option tabs or b) the drop down menu
 	a) 1. Click "Branch"
@@ -46,7 +46,9 @@ Merging your branch into master:
 	Note: yes, you'd need to switch back and forth to your branch and 
 	master many times if you have lots of small updates.
 
-5. Don't forget to switch back to your branch!!!
+5. Push to origin to Master
+
+6. Don't forget to switch back to your branch!!!
 
 Note: Always select "Bring my changes to ***[your branch]***" when 
 switching branches. And ALWAYS commit and update your branch first!
