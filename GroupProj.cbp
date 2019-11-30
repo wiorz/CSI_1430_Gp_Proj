@@ -45,6 +45,7 @@
 		<Unit filename="../classNotes/20191111Mon/20191111/point.h" />
 		<Unit filename="../classNotes/20191111Mon/20191111/rectangle.cpp" />
 		<Unit filename="../classNotes/20191111Mon/20191111/rectangle.h" />
+		<Unit filename="cannon.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
