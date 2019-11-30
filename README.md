@@ -48,7 +48,7 @@ Creating new branch from master:
 Merging your branch into master:  
 1. Commit your work, remember to comment usage messages.
 2. (Optional, if master is updated) "Update from master" (under Branch  
-tab) first and resolve all conflicts (on your local branch).  
+tab) first, and resolve all conflicts if they exist.  
 3. Push origin to YOUR branch.
 4. Switch over to Master.
 5. Your can use a) the option tabs or b) the drop down menu:  
