@@ -9,6 +9,5 @@ compile_commands.json
 CTestTestfile.cmake
 *.cbp
 *.layout
-bin/Debug/
-obj/Debug/
+Debug/
 *.o
