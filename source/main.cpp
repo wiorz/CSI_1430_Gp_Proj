@@ -32,7 +32,6 @@ int main(int argc, char* argv[])
     {
         if(g.kbhit())
         {
-
             key = g.getKey();
 
             // Steps to update:
