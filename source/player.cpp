@@ -132,7 +132,7 @@ color player::getClearedColor() const
 
 
 // Display helpers
-void player::draw(SDL_Plotter& g, ostream& os) const
+void player::draw(SDL_Plotter& g) const
 {
     // Draw body
     for(int y = min(body.getUpperLeft().y, body.getLowerRight().y);
@@ -141,8 +141,11 @@ void player::draw(SDL_Plotter& g, ostream& os) const
         for(int x = min(body.getUpperLeft().x, body.getLowerRight().x);
             x < max(body.getUpperLeft().x, body.getLowerRight().x); x++)
         {
-            //os << "body: x = " << x << ", y = " << y << "\n"; //For debugging
-            g.plotPixel(x, y, normal.R, normal.G, normal.B);
+            if(x >= 0 && y >= 0 && x < g.getCol() && y < g.getRow())
+                {
+                    g.plotPixel(x, y, normal.R, normal.G, normal.B);
+                }
+
         }
     }
 
@@ -153,8 +156,10 @@ void player::draw(SDL_Plotter& g, ostream& os) const
         for(int x = min(head.getUpperLeft().x, head.getLowerRight().x);
             x < max(head.getUpperLeft().x, head.getLowerRight().x); x++)
         {
-            //os << "head: x = " << x << ", y = " << y << "\n"; // For debugging
-            g.plotPixel(x, y, normal.R, normal.G, normal.B);
+            if(x >= 0 && y >= 0 && x < g.getCol() && y < g.getRow())
+                {
+                    g.plotPixel(x, y, normal.R, normal.G, normal.B);
+                }
         }
     }
 }
@@ -168,7 +173,11 @@ void player::undraw(SDL_Plotter& g) const
         for(int x = min(body.getUpperLeft().x, body.getLowerRight().x);
             x < max(body.getUpperLeft().x, body.getLowerRight().x); x++)
         {
-            g.plotPixel(x, y, cleared.R, cleared.G, cleared.B);
+            if(x >= 0 && y >= 0 && x < g.getCol() && y < g.getRow())
+                {
+                    g.plotPixel(x, y, cleared.R, cleared.G, cleared.B);
+                }
+
         }
     }
 
@@ -179,7 +188,10 @@ void player::undraw(SDL_Plotter& g) const
         for(int x = min(head.getUpperLeft().x, head.getLowerRight().x);
             x < max(head.getUpperLeft().x, head.getLowerRight().x); x++)
         {
-            g.plotPixel(x, y, cleared.R, cleared.G, cleared.B);
+            if(x >= 0 && y >= 0 && x < g.getCol() && y < g.getRow())
+                {
+                    g.plotPixel(x, y, cleared.R, cleared.G, cleared.B);
+                }
         }
     }
 

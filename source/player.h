@@ -39,7 +39,7 @@ class player
         color getClearedColor() const;
 
         // Display helpers
-        void draw(SDL_Plotter& g, ostream&) const;
+        void draw(SDL_Plotter& g) const;
         void undraw(SDL_Plotter& g) const;
 
         // Actions

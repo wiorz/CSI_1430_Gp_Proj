@@ -37,9 +37,8 @@ int main(int argc, char* argv[])
             // Step 1.
             // "Erase" previous rectangle by setting it to background color
             // Shows nothing with any key input.
-            cout << "before undraw" << endl;
             p.undraw(g);
-            cout << "after undraw" << endl <<endl;
+
 
 
 
@@ -50,7 +49,7 @@ int main(int argc, char* argv[])
             {
 
                 case RIGHT_ARROW:
-                    if(p.getBodyRectangle().getLowerRight().x + SPEED
+                    if(p.getBodyRectangle().getLowerRight().x
                        < WINDOWSWIDTH)
                     {
                         p.movePlayerByNSteps(1);
@@ -75,10 +74,7 @@ int main(int argc, char* argv[])
             // Steps 3.
             // Draw the updated rectangle
             // Important to reset color to what we want here.
-
-            cout << "before draw" << endl;
-            p.draw(g, cout);
-            cout << "after draw" << endl << endl;
+            p.draw(g);
 
         }
 
