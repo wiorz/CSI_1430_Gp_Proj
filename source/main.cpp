@@ -6,6 +6,7 @@
 #include "line.h"
 #include "rectangle.h"
 #include "circle.h"
+#include "player.h"
 #include "SDL_Plotter.h"
 
 using namespace std;
@@ -19,13 +20,7 @@ int main(int argc, char* argv[])
     SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
     srand(time(0));
     char key;
-
-
-    int centerX = g.getCol() / 2;
-    int centerY = g.getRow() / 2;
-
-    rectangle_t rec(point(centerX, centerY), point(centerX + 10,centerY + 10),
-                    GREENCOLOR);
+    player p;
 
     while(!g.getQuit())
     {
@@ -42,35 +37,44 @@ int main(int argc, char* argv[])
             // Step 1.
             // "Erase" previous rectangle by setting it to background color
             // Shows nothing with any key input.
-            rec.setColor(BLACKCOLOR);
-            rec.draw(g);
+            cout << "before undraw" << endl;
+            p.undraw(g);
+            cout << "after undraw" << endl <<endl;
+
+
 
             // Step 2.
             // Update coordinates
-            point tmpLR = rec.getLowerRight();
-            point tmpUL = rec.getUpperLeft();
 
             switch(toupper(key))
             {
 
                 case RIGHT_ARROW:
-                        // Boundary check, so it doesn't warp around.
-                        if(tmpLR.x + SPEED < 1080)
+                // Boundary check, so it doesn't warp around.
+//              cout << "before move: " << endl;
+//              cout << "Body LR x, LR Y, UL x, UL y" << endl;
+//            cout << p.getBodyRectangle().getLowerRight().x << " ";
+//            cout << p.getBodyRectangle().getLowerRight().y << " ";
+//            cout << p.getBodyRectangle().getUpperLeft().x << " ";
+//            cout << p.getBodyRectangle().getUpperLeft().y << endl;
+//
+//            cout << "Head LR x, LR Y, UL x, UL y" << endl;
+//            cout << p.getHeadRectangle().getLowerRight().x << " ";
+//            cout << p.getHeadRectangle().getLowerRight().y << " ";
+//            cout << p.getHeadRectangle().getUpperLeft().x << " ";
+//            cout << p.getHeadRectangle().getUpperLeft().y << endl << endl;
+                        if(p.getBodyRectangle().getLowerRight().x + SPEED
+                           < WINDOWSWIDTH)
                         {
-                            tmpLR.x += SPEED;
-                            tmpUL.x += SPEED;
-                            rec.setLowerRight(tmpLR);
-                            rec.setUpperLeft(tmpUL);
+                            p.movePlayerByNSteps(1);
                         }
 
                         break;
                 case LEFT_ARROW:
-                        if(tmpUL.x > 0)
+                        if(p.getBodyRectangle().getUpperLeft().x > 0)
                         {
-                            tmpLR.x -= SPEED;
-                            tmpUL.x -= SPEED;
-                            rec.setLowerRight(tmpLR);
-                            rec.setUpperLeft(tmpUL);
+
+                            p.movePlayerByNSteps(-1);
                         }
                         break;
                 case UP_ARROW:
@@ -81,13 +85,29 @@ int main(int argc, char* argv[])
 
             }
 
+//            cout << "After move:" << endl;
+//            cout << "Body LR x, LR Y, UL x, UL y" << endl;
+//            cout << p.getBodyRectangle().getLowerRight().x << " ";
+//            cout << p.getBodyRectangle().getLowerRight().y << " ";
+//            cout << p.getBodyRectangle().getUpperLeft().x << " ";
+//            cout << p.getBodyRectangle().getUpperLeft().y << endl;
+//
+//            cout << "Head LR x, LR Y, UL x, UL y" << endl;
+//            cout << p.getHeadRectangle().getLowerRight().x << " ";
+//            cout << p.getHeadRectangle().getLowerRight().y << " ";
+//            cout << p.getHeadRectangle().getUpperLeft().x << " ";
+//            cout << p.getHeadRectangle().getUpperLeft().y << endl << endl;
+
             // Steps 3.
             // Draw the updated rectangle
             // Important to reset color to what we want here.
-            rec.setColor(GREENCOLOR);
-            rec.draw(g);
+
+            cout << "before draw" << endl;
+            p.draw(g, cout);
+            cout << "after draw" << endl << endl;
 
         }
+
 
         g.update();
     }
