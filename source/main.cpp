@@ -50,53 +50,27 @@ int main(int argc, char* argv[])
             {
 
                 case RIGHT_ARROW:
-                // Boundary check, so it doesn't warp around.
-//              cout << "before move: " << endl;
-//              cout << "Body LR x, LR Y, UL x, UL y" << endl;
-//            cout << p.getBodyRectangle().getLowerRight().x << " ";
-//            cout << p.getBodyRectangle().getLowerRight().y << " ";
-//            cout << p.getBodyRectangle().getUpperLeft().x << " ";
-//            cout << p.getBodyRectangle().getUpperLeft().y << endl;
-//
-//            cout << "Head LR x, LR Y, UL x, UL y" << endl;
-//            cout << p.getHeadRectangle().getLowerRight().x << " ";
-//            cout << p.getHeadRectangle().getLowerRight().y << " ";
-//            cout << p.getHeadRectangle().getUpperLeft().x << " ";
-//            cout << p.getHeadRectangle().getUpperLeft().y << endl << endl;
-                        if(p.getBodyRectangle().getLowerRight().x + SPEED
-                           < WINDOWSWIDTH)
-                        {
-                            p.movePlayerByNSteps(1);
-                        }
+                    if(p.getBodyRectangle().getLowerRight().x + SPEED
+                       < WINDOWSWIDTH)
+                    {
+                        p.movePlayerByNSteps(1);
+                    }
 
-                        break;
+                    break;
                 case LEFT_ARROW:
-                        if(p.getBodyRectangle().getUpperLeft().x > 0)
-                        {
+                    if(p.getBodyRectangle().getUpperLeft().x > 0)
+                    {
 
-                            p.movePlayerByNSteps(-1);
-                        }
-                        break;
+                        p.movePlayerByNSteps(-1);
+                    }
+                    break;
                 case UP_ARROW:
-                        //speed++;
-                        break;
+                    //speed++;
+                    break;
                 case DOWN_ARROW:
-                        break;
+                    break;
 
             }
-
-//            cout << "After move:" << endl;
-//            cout << "Body LR x, LR Y, UL x, UL y" << endl;
-//            cout << p.getBodyRectangle().getLowerRight().x << " ";
-//            cout << p.getBodyRectangle().getLowerRight().y << " ";
-//            cout << p.getBodyRectangle().getUpperLeft().x << " ";
-//            cout << p.getBodyRectangle().getUpperLeft().y << endl;
-//
-//            cout << "Head LR x, LR Y, UL x, UL y" << endl;
-//            cout << p.getHeadRectangle().getLowerRight().x << " ";
-//            cout << p.getHeadRectangle().getLowerRight().y << " ";
-//            cout << p.getHeadRectangle().getUpperLeft().x << " ";
-//            cout << p.getHeadRectangle().getUpperLeft().y << endl << endl;
 
             // Steps 3.
             // Draw the updated rectangle

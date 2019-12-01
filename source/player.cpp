@@ -5,21 +5,21 @@ using namespace std;
 
 player::player()
 {
-//    body.setLowerRight(point(WIDTH/2 + UNITSIZE * 1.5,
-//                             HEIGHT - UNITSIZE * 0.5));
-//    body.setUpperLeft(point(WIDTH/2 - UNITSIZE * 1.5,
-//                            HEIGHT - UNITSIZE * 1.5));
-//    head.setLowerRight(point(WIDTH/2 + UNITSIZE * 0.5,
-//                             HEIGHT - UNITSIZE *1.5));
-//    head.setUpperLeft(point(WIDTH/2 - UNITSIZE * 0.5,
-//                            HEIGHT - UNITSIZE * 2.0));
-    body.setLowerRight(point(WIDTH/2 + UNITSIZE * 1.5, HEIGHT));
+    body.setLowerRight(point(WIDTH/2 + UNITSIZE * 1.5,
+                             HEIGHT - UNITSIZE * 0.5));
     body.setUpperLeft(point(WIDTH/2 - UNITSIZE * 1.5,
-                            HEIGHT - UNITSIZE));
-    head.setLowerRight(point(WIDTH/2 + UNITSIZE * 0.5,
-                             HEIGHT - UNITSIZE));
-    head.setUpperLeft(point(WIDTH/2 - UNITSIZE * 0.5,
                             HEIGHT - UNITSIZE * 1.5));
+    head.setLowerRight(point(WIDTH/2 + UNITSIZE * 0.5,
+                             HEIGHT - UNITSIZE *1.5));
+    head.setUpperLeft(point(WIDTH/2 - UNITSIZE * 0.5,
+                            HEIGHT - UNITSIZE * 2.0));
+//    body.setLowerRight(point(WIDTH/2 + UNITSIZE * 1.5, HEIGHT));
+//    body.setUpperLeft(point(WIDTH/2 - UNITSIZE * 1.5,
+//                            HEIGHT - UNITSIZE));
+//    head.setLowerRight(point(WIDTH/2 + UNITSIZE * 0.5,
+//                             HEIGHT - UNITSIZE));
+//    head.setUpperLeft(point(WIDTH/2 - UNITSIZE * 0.5,
+//                            HEIGHT - UNITSIZE * 1.5));
     step = DEFAULTSTEP;
     normal = GREENCOLOR;
     cleared = BLACKCOLOR;
@@ -136,10 +136,10 @@ void player::draw(SDL_Plotter& g, ostream& os) const
 {
     // Draw body
     for(int y = min(body.getUpperLeft().y, body.getLowerRight().y);
-        y <= max(body.getUpperLeft().y, body.getLowerRight().y); y++)
+        y < max(body.getUpperLeft().y, body.getLowerRight().y); y++)
     {
         for(int x = min(body.getUpperLeft().x, body.getLowerRight().x);
-            x <= max(body.getUpperLeft().x, body.getLowerRight().x); x++)
+            x < max(body.getUpperLeft().x, body.getLowerRight().x); x++)
         {
             //os << "body: x = " << x << ", y = " << y << "\n"; //For debugging
             g.plotPixel(x, y, normal.R, normal.G, normal.B);
@@ -148,10 +148,10 @@ void player::draw(SDL_Plotter& g, ostream& os) const
 
     // Draw head
     for(int y = min(head.getUpperLeft().y, head.getLowerRight().y);
-        y <= max(head.getUpperLeft().y, head.getLowerRight().y); y++)
+        y < max(head.getUpperLeft().y, head.getLowerRight().y); y++)
     {
         for(int x = min(head.getUpperLeft().x, head.getLowerRight().x);
-            x <= max(head.getUpperLeft().x, head.getLowerRight().x); x++)
+            x < max(head.getUpperLeft().x, head.getLowerRight().x); x++)
         {
             //os << "head: x = " << x << ", y = " << y << "\n"; // For debugging
             g.plotPixel(x, y, normal.R, normal.G, normal.B);
@@ -163,10 +163,10 @@ void player::undraw(SDL_Plotter& g) const
 {
     // Draw body
     for(int y = min(body.getUpperLeft().y, body.getLowerRight().y);
-        y <= max(body.getUpperLeft().y, body.getLowerRight().y); y++)
+        y < max(body.getUpperLeft().y, body.getLowerRight().y); y++)
     {
         for(int x = min(body.getUpperLeft().x, body.getLowerRight().x);
-            x <= max(body.getUpperLeft().x, body.getLowerRight().x); x++)
+            x < max(body.getUpperLeft().x, body.getLowerRight().x); x++)
         {
             g.plotPixel(x, y, cleared.R, cleared.G, cleared.B);
         }
@@ -174,10 +174,10 @@ void player::undraw(SDL_Plotter& g) const
 
     // Draw head
     for(int y = min(head.getUpperLeft().y, head.getLowerRight().y);
-        y <= max(head.getUpperLeft().y, head.getLowerRight().y); y++)
+        y < max(head.getUpperLeft().y, head.getLowerRight().y); y++)
     {
         for(int x = min(head.getUpperLeft().x, head.getLowerRight().x);
-            x <= max(head.getUpperLeft().x, head.getLowerRight().x); x++)
+            x < max(head.getUpperLeft().x, head.getLowerRight().x); x++)
         {
             g.plotPixel(x, y, cleared.R, cleared.G, cleared.B);
         }

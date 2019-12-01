@@ -37,7 +37,7 @@
 	"point.h"
 	"SDL_Plotter.h"
 
-1575172853 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\rectangle.cpp
+1575236869 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\rectangle.cpp
 	"rectangle.h"
 
 1575172853 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\rectangle.h
@@ -48,7 +48,7 @@
 1575172853 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\sdl_plotter.cpp
 	"SDL_Plotter.h"
 
-1575185333 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\main.cpp
+1575188969 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\main.cpp
 	<iostream>
 	<ctime>
 	"point.h"
@@ -58,7 +58,7 @@
 	"player.h"
 	"SDL_Plotter.h"
 
-1575186279 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.cpp
+1575236934 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.cpp
 	"player.h"
 	<ostream>
 
