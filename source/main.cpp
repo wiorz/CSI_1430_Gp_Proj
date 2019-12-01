@@ -10,20 +10,22 @@
 
 using namespace std;
 
-const int CANNONROW = 5;
-const int CANNONCOL = 5;
+const int WINDOWSWIDTH = 1080;
+const int WINDOWSHEIGHT = 720;
+const int SPEED = 5;
 
 int main(int argc, char* argv[])
 {
-    SDL_Plotter g(720, 1080);
+    SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
     srand(time(0));
     char key;
 
-    int speed = 3;
-    int cannonX = g.getCol() / 2;
-    int cannonY = g.getRow() / 2;
 
-    rectangle_t rec(point(10, 10), point(cannonX,cannonY), RED);
+    int centerX = g.getCol() / 2;
+    int centerY = g.getRow() / 2;
+
+    rectangle_t rec(point(centerX, centerY), point(centerX + 10,centerY + 10),
+                    GREENCOLOR);
 
     while(!g.getQuit())
     {
@@ -40,7 +42,7 @@ int main(int argc, char* argv[])
             // Step 1.
             // "Erase" previous rectangle by setting it to background color
             // Shows nothing with any key input.
-            rec.setColor(WHITECOLOR);
+            rec.setColor(BLACKCOLOR);
             rec.draw(g);
 
             // Step 2.
@@ -52,34 +54,37 @@ int main(int argc, char* argv[])
             {
 
                 case RIGHT_ARROW:
-                        tmpLR.x += speed;
-                        tmpUL.x += speed;
-                        rec.setLowerRight(tmpLR);
-                        rec.setUpperLeft(tmpUL);
+                        // Boundary check, so it doesn't warp around.
+                        if(tmpLR.x + SPEED < 1080)
+                        {
+                            tmpLR.x += SPEED;
+                            tmpUL.x += SPEED;
+                            rec.setLowerRight(tmpLR);
+                            rec.setUpperLeft(tmpUL);
+                        }
+
                         break;
                 case LEFT_ARROW:
-                        tmpLR.x -= speed;
-                        tmpUL.x -= speed;
-                        rec.setLowerRight(tmpLR);
-                        rec.setUpperLeft(tmpUL);
+                        if(tmpUL.x > 0)
+                        {
+                            tmpLR.x -= SPEED;
+                            tmpUL.x -= SPEED;
+                            rec.setLowerRight(tmpLR);
+                            rec.setUpperLeft(tmpUL);
+                        }
                         break;
                 case UP_ARROW:
-                        speed++;
+                        //speed++;
                         break;
                 case DOWN_ARROW:
-                        // Avoid negative speed!
-                        if(speed > 1)
-                        {
-                            speed--;
-                            break;
-                        }
+                        break;
 
             }
 
             // Steps 3.
             // Draw the updated rectangle
             // Important to reset color to what we want here.
-            rec.setColor(RED);
+            rec.setColor(GREENCOLOR);
             rec.draw(g);
 
         }
@@ -87,6 +92,8 @@ int main(int argc, char* argv[])
         g.update();
     }
 
+    // Clean up
+    SDL_Quit();
     return 0;
 }
 

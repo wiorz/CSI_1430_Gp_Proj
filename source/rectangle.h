@@ -13,7 +13,7 @@ class rectangle_t
 
     public:
         rectangle_t();
-        rectangle_t(point, point, color = RED);
+        rectangle_t(point, point, color = REDCOLOR);
         rectangle_t(const rectangle_t&);
 
         void setUpperLeft(const point);

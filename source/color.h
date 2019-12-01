@@ -25,8 +25,9 @@ struct color
     }
 };
 
-const color RED(220, 0, 0);
-const color BLACK(0, 0, 0);
+const color REDCOLOR(220, 0, 0);
+const color BLACKCOLOR(0, 0, 0);
 const color WHITECOLOR(255, 255, 255);
+const color GREENCOLOR(5, 250, 10);
 
 #endif // COLOR_H_INCLUDED

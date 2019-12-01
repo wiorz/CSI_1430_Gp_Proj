@@ -6,7 +6,7 @@ circle_t::circle_t()
 {
     radius = 1.0;
     center = point(0, 0);
-    c      = RED;
+    c      = REDCOLOR;
 }
 
 circle_t::circle_t(double rIn, point centerIn, color colorIn)

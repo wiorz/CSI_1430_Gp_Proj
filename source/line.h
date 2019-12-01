@@ -15,7 +15,7 @@ class line
 
     public:
         // Initialize position and color.
-        line(point = point (0, 0), point = point(1, 1), color = BLACK);
+        line(point = point (0, 0), point = point(1, 1), color = BLACKCOLOR);
         // The slope already has the points.
         // Just need to pass in the value for changing.
         bool slope(double& m) const;

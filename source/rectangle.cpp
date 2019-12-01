@@ -5,7 +5,7 @@ rectangle_t::rectangle_t()
     upperL.x = upperL.y = 0;
     // lowerR = point(1, 1); this is a lot of work
     lowerR.x = lowerR.y = 1;
-    c = RED;
+    c = REDCOLOR;
 }
 
 rectangle_t::rectangle_t(point uL, point lR, color col)

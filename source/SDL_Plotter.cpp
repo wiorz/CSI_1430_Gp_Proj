@@ -52,7 +52,8 @@ SDL_Plotter::SDL_Plotter(int r, int c, bool WITH_SOUND){
 
     pixels   = new Uint32[col * row];
 
-    memset(pixels, WHITE, col * row * sizeof(Uint32));
+    // Changed from white background to black
+    memset(pixels, 0, col * row * sizeof(Uint32));
 
     //SOUND Thread Pool
     Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 );

@@ -4,7 +4,7 @@
 point::point()
 {
 	x = y = 0; // No need to instantiate, just initialize. Global object scope.
-	c = BLACK;
+	c = BLACKCOLOR;
 
 }
 
@@ -12,7 +12,7 @@ point::point(int a, int b)
 {
 	x = a;
 	y = b;
-	c = BLACK;
+	c = BLACKCOLOR;
 
 }
 

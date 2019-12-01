@@ -1,0 +1,59 @@
+# depslib dependency file v1.0
+1575169086 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\circle.cpp
+	"circle.h"
+
+1575101477 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\circle.h
+	"point.h"
+	"color.h"
+	"SDL_Plotter.h"
+
+1575101477 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\point.h
+	<ostream>
+	<cmath>
+	"SDL_Plotter.h"
+	"color.h"
+
+1575101477 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\sdl_plotter.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<SDL2/SDL_thread.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1575169175 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\color.h
+
+1575101477 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\line.cpp
+	"line.h"
+
+1575169097 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\line.h
+	<cassert>
+	"point.h"
+	"color.h"
+
+1575169130 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\point.cpp
+	"point.h"
+	"SDL_Plotter.h"
+
+1575169147 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\rectangle.cpp
+	"rectangle.h"
+
+1575169104 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\rectangle.h
+	"point.h"
+	"color.h"
+	"SDL_Plotter.h"
+
+1575168301 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\sdl_plotter.cpp
+	"SDL_Plotter.h"
+
+1575169140 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\main.cpp
+	<iostream>
+	<ctime>
+	"point.h"
+	"line.h"
+	"rectangle.h"
+	"circle.h"
+	"SDL_Plotter.h"
+
