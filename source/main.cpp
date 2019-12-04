@@ -14,11 +14,7 @@ using namespace std;
 
 const int WINDOWSWIDTH = 1080;
 const int WINDOWSHEIGHT = 720;
-<<<<<<< HEAD
-//const int SPEED = 5;
-=======
 const int SPEED = 10;
->>>>>>> master
 
 int main(int argc, char* argv[])
 {
