@@ -14,7 +14,7 @@ using namespace std;
 
 const int WINDOWSWIDTH = 1080;
 const int WINDOWSHEIGHT = 720;
-const int SPEED = 5;
+//const int SPEED = 5;
 
 int main(int argc, char* argv[])
 {
