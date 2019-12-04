@@ -17,7 +17,7 @@ rectangle_t::rectangle_t(point uL, point lR, color col)
 
 rectangle_t::rectangle_t(const rectangle_t& other)
 {
-    upperL = other.upperL; // Members of the same calss can see each other's private data.
+    upperL = other.upperL; // Members of the same class can see each other's private data.
     lowerR = other.lowerR;
     c = other.c;
 }

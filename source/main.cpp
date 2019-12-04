@@ -9,12 +9,13 @@
 #include "circle.h"
 #include "player.h"
 #include "SDL_Plotter.h"
+#include "test.h"
 
 using namespace std;
 
 const int WINDOWSWIDTH = 1080;
 const int WINDOWSHEIGHT = 720;
-const int SPEED = 10;
+const int SPEED = 15;
 
 int main(int argc, char* argv[])
 {
@@ -22,6 +23,7 @@ int main(int argc, char* argv[])
     srand(time(0));
     char key;
     player p(g, SPEED);
+	bullet bill;
 
     while(!g.getQuit())
     {
@@ -68,6 +70,10 @@ int main(int argc, char* argv[])
                     break;
                 case DOWN_ARROW:
                     break;
+				case ' ' :
+					bullet();
+					bill.drawBullet(g);
+					break;
 
             }
 
