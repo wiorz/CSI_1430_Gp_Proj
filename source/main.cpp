@@ -13,14 +13,14 @@ using namespace std;
 
 const int WINDOWSWIDTH = 1080;
 const int WINDOWSHEIGHT = 720;
-const int SPEED = 5;
+const int SPEED = 10;
 
 int main(int argc, char* argv[])
 {
     SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
     srand(time(0));
     char key;
-    player p;
+    player p(g, SPEED);
 
     while(!g.getQuit())
     {
