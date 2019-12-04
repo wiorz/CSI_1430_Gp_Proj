@@ -25,6 +25,22 @@ player::player()
     cleared = BLACKCOLOR;
 }
 
+player::player(SDL_Plotter& g, int stepSize)
+{
+    body.setLowerRight(point(g.getCol()/2 + UNITSIZE * 1.5,
+                             g.getRow() - UNITSIZE * 0.5));
+    body.setUpperLeft(point(g.getCol()/2 - UNITSIZE * 1.5,
+                            g.getRow() - UNITSIZE * 1.5));
+    head.setLowerRight(point(g.getCol()/2 + UNITSIZE * 0.5,
+                             g.getRow() - UNITSIZE *1.5));
+    head.setUpperLeft(point(g.getCol()/2 - UNITSIZE * 0.5,
+                            g.getRow() - UNITSIZE * 2.0));
+
+    step = stepSize;
+    normal = GREENCOLOR;
+    cleared = BLACKCOLOR;
+}
+
 player::player(const rectangle_t& rec)
 {
     body = rec;
