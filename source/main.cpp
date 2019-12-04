@@ -3,13 +3,18 @@
 
 #include <iostream>
 #include <ctime>
+#include "SDL_Plotter.h"
 #include "point.h"
 #include "line.h"
 #include "rectangle.h"
 #include "circle.h"
 #include "player.h"
+<<<<<<< HEAD
 #include "SDL_Plotter.h"
 #include "test.h"
+=======
+#include "alien.h"
+>>>>>>> master
 
 using namespace std;
 
@@ -23,12 +28,22 @@ int main(int argc, char* argv[])
     srand(time(0));
     char key;
     player p(g, SPEED);
+<<<<<<< HEAD
 	bullet bill;
+=======
+    alien_t a1(point(g.getCol()/2, g.getRow()/2), SPEED);
+>>>>>>> master
 
     while(!g.getQuit())
     {
         if(g.kbhit())
         {
+<<<<<<< HEAD
+=======
+
+            cout << alien_t::totalCount << endl;
+
+>>>>>>> master
             key = g.getKey();
 
             // Steps to update:
@@ -40,8 +55,6 @@ int main(int argc, char* argv[])
             // "Erase" previous rectangle by setting it to background color
             // Shows nothing with any key input.
             p.undraw(g);
-
-
 
 
             // Step 2.
@@ -61,12 +74,10 @@ int main(int argc, char* argv[])
                 case LEFT_ARROW:
                     if(p.getBodyRectangle().getUpperLeft().x > 0)
                     {
-
                         p.movePlayerByNSteps(-1);
                     }
                     break;
                 case UP_ARROW:
-                    //speed++;
                     break;
                 case DOWN_ARROW:
                     break;
