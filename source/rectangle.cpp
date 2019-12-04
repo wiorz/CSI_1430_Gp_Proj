@@ -54,11 +54,14 @@ color rectangle_t::getColor() const
 
 void rectangle_t::draw(SDL_Plotter& g) const
 {
-    for(int y = min(upperL.y, lowerR.y); y <= max(upperL.y, lowerR.y); y++)
+    for(int y = min(upperL.y, lowerR.y); y < max(upperL.y, lowerR.y); y++)
     {
-        for(int x = min(upperL.x, lowerR.x); x <= max(upperL.x, lowerR.x); x++)
+        for(int x = min(upperL.x, lowerR.x); x < max(upperL.x, lowerR.x); x++)
         {
-            g.plotPixel(x, y, c.R, c.G, c.B);
+            if(x >= 0 && y >= 0 && x < g.getCol() && y < g.getRow())
+                {
+                    g.plotPixel(x, y, c.R, c.G, c.B);
+                }
         }
     }
 }
