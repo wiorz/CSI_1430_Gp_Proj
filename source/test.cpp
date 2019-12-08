@@ -2,7 +2,12 @@
 
 
 bullet::bullet() {
+	count = 0;
+}
+
+void bullet::countInc() {
 	count++;
+	b.push_back(1);
 	rect.getHeadRectangle();
 	p = rect.getUpperLeft();
 	p1 = rect.getLowerRight();
@@ -22,10 +27,12 @@ void bullet::drawBullet(SDL_Plotter& g) {
 			break;
 		for (int i = 0; i < count; i++) {
 			g.plotPixel(b[count].x, b[count].y, 5, 250, 10);
-			if (b[count].y == 718)
+			if (b[count].y == 718) {
 				b.erase(b.begin() + i);
+				break;
+			}
 			else
-				b[count].y++;
+				b[count].y += 1;
 		}
 	}
 }
