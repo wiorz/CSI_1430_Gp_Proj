@@ -10,6 +10,7 @@
 #include "circle.h"
 #include "player.h"
 #include "alien.h"
+#include "collision.h"
 
 using namespace std;
 
@@ -24,6 +25,7 @@ int main(int argc, char* argv[])
     char key;
     player p(g, SPEED);
     alien_t a1(point(g.getCol()/2, g.getRow()/2), SPEED);
+    alien_t a2(point(g.getCol()/2, g.getRow()/2), SPEED);
 
     while(!g.getQuit())
     {
@@ -31,6 +33,10 @@ int main(int argc, char* argv[])
         {
 
             cout << alien_t::totalCount << endl;
+			a1.setNormalColor(BLACKCOLOR);
+			a1.draw(g);
+			a2.setNormalColor(BLACKCOLOR);
+			a2.draw(g);
 
             key = g.getKey();
 
@@ -56,6 +62,7 @@ int main(int argc, char* argv[])
                        < WINDOWSWIDTH)
                     {
                         p.movePlayerByNSteps(1);
+						a1.moveByNStepsInXCoord(1);
                     }
 
                     break;
@@ -63,19 +70,45 @@ int main(int argc, char* argv[])
                     if(p.getBodyRectangle().getUpperLeft().x > 0)
                     {
                         p.movePlayerByNSteps(-1);
+						a1.moveByNStepsInXCoord(-1);
                     }
                     break;
                 case UP_ARROW:
+					a1.moveByNStepsInYCoord(-1);
                     break;
                 case DOWN_ARROW:
+					a1.moveByNStepsInYCoord(1);
                     break;
+				case '3':
+					a2.moveByNStepsInYCoord(1);
+					break;
+				case '1':
+                    if(p.getBodyRectangle().getLowerRight().x
+                       < WINDOWSWIDTH) {
+					a2.moveByNStepsInXCoord(-1);
+					}
+					break;
+				case '2':
+					a2.moveByNStepsInYCoord(-1);
+					break;
+				case '4':
+                    if(p.getBodyRectangle().getUpperLeft().x > 0) {
+					a2.moveByNStepsInXCoord(1);
+					}
+					break;
+				case ' ':
+					break;
             }
 
             // Steps 3.
             // Draw the updated rectangle
             // Important to reset color to what we want here.
             p.draw(g);
-
+			a1.setNormalColor(GREENCOLOR);
+			a2.setNormalColor(GREENCOLOR);
+			collid(a1, a2);
+			a1.draw(g);
+			a2.draw(g);
         }
 
 
