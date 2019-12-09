@@ -10,11 +10,9 @@
 #include "circle.h"
 #include "player.h"
 #include "alien.h"
-<<<<<<< HEAD
-#include <fstream>
-=======
 #include "alien_group.h"
->>>>>>> master
+#include <fstream>
+#include <cctype>
 
 using namespace std;
 
@@ -28,35 +26,38 @@ int ScoreBoard();
 
 int main(int argc, char* argv[])
 {
-<<<<<<< HEAD
 	int option;
 	do {
 		SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
 		srand(time(0));
 		char key;
 		player p(g, SPEED);
-		alien_t a1(point(g.getCol()/2, g.getRow()/2), SPEED);
-		alien_t a2(point(g.getCol()/2, g.getRow()/2), SPEED);
+		alien_group aG(g, SPEED);
 		option = menu();
+		clock_t startTime = clock();
 		while (option == 2 || option == 3) {
 			if (option == 2)
 				option = credits();
 			else if (option == 3)
 				option = ScoreBoard();
-			else if (option != 2 && option != 3)
+			else if ((option != 2 && option != 3) || isdigit(option) == false)
 				break;
 		}
 
-		while(!g.getQuit() && option == 1)
-		{
+		while(!g.getQuit() && option == 1) {
+
+        clock_t currTime = clock();
+
+        if(static_cast<int>(currTime - startTime) % 150 == 149) {
+            aG.undraw(g);
+            aG.moveAliensByNSteps(g, 1);
+            aG.draw(g);
+
+        }
 			if(g.kbhit())
 			{
 
 				cout << alien_t::totalCount << endl;
-				a1.setNormalColor(BLACKCOLOR);
-				a1.draw(g);
-				a2.setNormalColor(BLACKCOLOR);
-				a2.draw(g);
 
 				key = g.getKey();
 
@@ -82,7 +83,6 @@ int main(int argc, char* argv[])
 						   < WINDOWSWIDTH)
 						{
 							p.movePlayerByNSteps(1);
-							a1.moveByNStepsInXCoord(1);
 						}
 
 						break;
@@ -90,31 +90,11 @@ int main(int argc, char* argv[])
 						if(p.getBodyRectangle().getUpperLeft().x > 0)
 						{
 							p.movePlayerByNSteps(-1);
-							a1.moveByNStepsInXCoord(-1);
 						}
 						break;
 					case UP_ARROW:
-						a1.moveByNStepsInYCoord(-1);
 						break;
 					case DOWN_ARROW:
-						a1.moveByNStepsInYCoord(1);
-						break;
-					case '3':
-						a2.moveByNStepsInYCoord(1);
-						break;
-					case '1':
-						if(p.getBodyRectangle().getLowerRight().x
-						   < WINDOWSWIDTH) {
-						a2.moveByNStepsInXCoord(-1);
-						}
-						break;
-					case '2':
-						a2.moveByNStepsInYCoord(-1);
-						break;
-					case '4':
-						if(p.getBodyRectangle().getUpperLeft().x > 0) {
-						a2.moveByNStepsInXCoord(1);
-						}
 						break;
 					case ' ':
 						break;
@@ -124,10 +104,6 @@ int main(int argc, char* argv[])
 				// Draw the updated rectangle
 				// Important to reset color to what we want here.
 				p.draw(g);
-				a1.setNormalColor(GREENCOLOR);
-				a2.setNormalColor(GREENCOLOR);
-				a1.draw(g);
-				a2.draw(g);
 			}
 
 
@@ -139,103 +115,70 @@ int main(int argc, char* argv[])
 	} while (option != 4);
 	return 0;
 }
-=======
-    SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
-    srand(time(0));
-    char key;
-    player p(g, SPEED);
-    alien_group aG(g, SPEED);
-
-    clock_t startTime = clock();
-
-    while(!g.getQuit())
-    {
-        clock_t currTime = clock();
-
-        if(static_cast<int>(currTime - startTime) % 150 == 149)
-        {
-            aG.undraw(g);
-            aG.moveAliensByNSteps(g, 1);
-            aG.draw(g);
-
-        }
-
-        if(g.kbhit())
-        {
-
-            key = g.getKey();
-
-            // Steps to update:
-            // 1. Delete the last object by resetting them to background color
-            // 2. Update coordinates of objects
-            // 3. Draw updated object.
-
-            // Step 1.
-            // "Erase" previous rectangle by setting it to background color
-            // Shows nothing with any key input.
-            p.undraw(g);
-
-
-            // Step 2.
-            // Update coordinates
-
-            switch(toupper(key))
-            {
-
-                case RIGHT_ARROW:
-                    if(p.getBodyRectangle().getLowerRight().x
-                       < WINDOWSWIDTH)
-                    {
-                        p.movePlayerByNSteps(1);
-                    }
-
-                    break;
-                case LEFT_ARROW:
-                    if(p.getBodyRectangle().getUpperLeft().x > 0)
-                    {
-                        p.movePlayerByNSteps(-1);
-                    }
-                    break;
-                case UP_ARROW:
-                    break;
-                case DOWN_ARROW:
-                    break;
-
-            }
-
-            // Steps 3.
-            // Draw the updated rectangle
-            // Important to reset color to what we want here.
-            p.draw(g);
-
-        }
-
-
-
-
-        g.update();
-    }
->>>>>>> master
 
 int menu() {
 	int entry;
+	string name;
 	cout << "Space Invaders Ripoff \n\n"
 		 << "1. Start\n\n"
 		 << "2. Credits\n\n"
 		 << "3. ScoreBoard\n\n"
 		 << "4. quit game\n\n";
-		cin >> entry;
+		cin >> name;
+		do {
+			if (name == "1") {
+				entry = 1;
+				break;
+			}
+			else if (name == "2") {
+				entry = 2;
+				break;
+			}
+			else if (name == "3") {
+				entry = 3;
+				break;
+			}
+			else if (name == "4") {
+				entry = 4;
+				break;
+			}
+			cout << "Only integers allowed\n";
+			cin >> name;
+			cout << endl;
+		} while (name != "1" || name != "2" || name != "3" || name != "4");
 		return entry;
 }
 
 int credits() {
 	int entry;
+	string name;
 	cout << "CREDITS:\n\n"
 		 << "Ivan Ko: created the player, the enemies and the bullets\n\n"
 		 << "Yi Ding: did Collision, scoring system, menu\n\n"
 		 << "Third person: dunno\n\n"
 		 << "select the menu option you desire\n\n";
-	cin >> entry;
+	cin >> name;
+	do {
+		if (name == "1") {
+			entry = 1;
+			break;
+		}
+		else if (name == "2") {
+			entry = 2;
+			break;
+		}
+		else if (name == "3") {
+			entry = 3;
+			break;
+		}
+		else if (name == "4") {
+			entry = 4;
+			break;
+		}
+		cout << "Only integers allowed\n";
+		cin >> name;
+		cout << endl;
+	} while (name != "1" || name != "2" || name != "3" || name != "4");
 	return entry;
 }
 int ScoreBoard() {
@@ -249,7 +192,27 @@ int ScoreBoard() {
 	}
 	in.close();
 	cout << endl << "select the menu option you desire\n\n";
-	cin >> entry;
-	cout << endl;
+	cin >> name;
+	do {
+		if (name == "1") {
+			entry = 1;
+			break;
+		}
+		else if (name == "2") {
+			entry = 2;
+			break;
+		}
+		else if (name == "3") {
+			entry = 3;
+			break;
+		}
+		else if (name == "4") {
+			entry = 4;
+			break;
+		}
+		cout << "Only integers allowed\n";
+		cin >> name;
+		cout << endl;
+	} while (name != "1" || name != "2" || name != "3" || name != "4");
 	return entry;
 }
