@@ -129,12 +129,14 @@ int main(int argc, char* argv[])
                     key = g.getKey();
 
                     // Steps to update:
-                    // 1. Delete the last object by resetting them to background color
+                    // 1. Delete the last object by resetting them
+					// to background color
                     // 2. Update coordinates of objects
                     // 3. Draw updated object.
 
                     // Step 1.
-                    // "Erase" previous rectangle by setting it to background color
+                    // "Erase" previous rectangle by setting it
+					// to background color
                     // Shows nothing with any key input.
                     p.undraw(g);
 

@@ -61,7 +61,8 @@ void circle_t::draw(SDL_Plotter& g)
     {
         for(int x = center.x - radius; x <= center.x + radius; x++)
         {
-            // g.plotPixel(x, y, c.R, c.G, c.B); this will only give us a a rectangle
+            // g.plotPixel(x, y, c.R, c.G, c.B);
+			// this will only give us a a rectangle
             // The first if is checking whether the point is in the circle
             if(sqrt(pow(center.x - x, 2) + pow(center.y - y, 2)) <= radius)
             {
