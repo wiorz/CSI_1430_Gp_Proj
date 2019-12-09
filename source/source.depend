@@ -48,7 +48,7 @@
 1575172853 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\sdl_plotter.cpp
 	"SDL_Plotter.h"
 
-1575890022 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\main.cpp
+1575897854 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\main.cpp
 	<iostream>
 	<time.h>
 	<vector>
@@ -64,11 +64,11 @@
 	"bullet.h"
 	"collision.h"
 
-1575887449 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.cpp
+1575898388 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.cpp
 	"player.h"
 	<ostream>
 
-1575887449 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.h
+1575892289 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.h
 	<vector>
 	"rectangle.h"
 	"color.h"
@@ -87,17 +87,17 @@
 1575887449 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien.cpp
 	"alien.h"
 
-1575887449 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien_group.cpp
+1575891264 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien_group.cpp
 	"alien_group.h"
 
-1575890122 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien_group.h
+1575891264 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien_group.h
 	<vector>
 	<ostream>
 	"circle.h"
 	"alien.h"
 	"SDL_Plotter.h"
 
-1575889698 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\bullet.cpp
+1575891264 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\bullet.cpp
 	"bullet.h"
 
 1575887449 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\bullet.h
@@ -107,7 +107,7 @@
 	"circle.h"
 	"rectangle.h"
 
-1575891043 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\collision.h
+1575897686 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\collision.h
 	"SDL_Plotter.h"
 	"alien.h"
 	"alien_group.h"

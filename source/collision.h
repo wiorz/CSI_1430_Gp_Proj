@@ -38,16 +38,16 @@ void collid(alien_group v, vector<bullet_t>& b, int n, int bullA, SDL_Plotter& g
 	}
 }
 
-void collid2(alien_group&, vector<bullet_t>&, SDL_Plotter&, ostream&);
+void collid2KillAlien(alien_group&, vector<bullet_t>&, SDL_Plotter&, ostream&);
 
-void collid2(alien_group& aG, vector<bullet_t>& btVec, SDL_Plotter& g, ostream& os)
+void collid2KillAlien(alien_group& aG, vector<bullet_t>& btVec, SDL_Plotter& g, ostream& os)
 {
     if(btVec.size())
     {
         if(aG.getAlienGroupSize())
         {
 
-            for(int j = 0; j < aG.getAlienGroupSize(); j++)
+            for(unsigned int j = 0; j < aG.getAlienGroupSize(); j++)
             {
                 if (btVec.at(0).getIsAlive() == false)
                 {
@@ -67,6 +67,40 @@ void collid2(alien_group& aG, vector<bullet_t>& btVec, SDL_Plotter& g, ostream& 
                 btVec.at(0).killAndRemoveFromBTVector(btVec, 0);
             }
         }
+    }
+}
+
+void collid2KillPlayer(player&, vector<bullet_t>&, SDL_Plotter&, ostream&);
+
+void collid2KillPlayer(player& p, vector<bullet_t>& btVec, SDL_Plotter& g, ostream& os)
+{
+    int index;
+    bool isHit = false;
+    if(btVec.size())
+    {
+
+        for(unsigned int i = 0; i < btVec.size(); i++)
+        {
+            if (btVec.at(i).getIsAlive() == false)
+            {
+                //os << "dead bullet" << endl;
+                break;
+            }
+
+            if (circleIntersect(p.getHitBox(), btVec.at(i).getHitBox()))
+            {
+                p.hurt();
+                btVec.at(i).kill();
+                index = i;
+                isHit = true;
+            }
+        }
+
+    }
+
+    if(isHit)
+    {
+        btVec.at(index).killAndRemoveFromBTVector(btVec, index);
     }
 }
 #endif

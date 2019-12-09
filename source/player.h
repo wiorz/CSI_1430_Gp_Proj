@@ -12,6 +12,8 @@ const int UNITSIZE = 20;
 const int WIDTH = 1080;
 const int HEIGHT = 720;
 const int DEFAULTSTEP = 10;
+const int DEFAULTHP = 2;
+
 
 class player
 {
@@ -20,6 +22,8 @@ class player
         int step; // Default to fixed speed of 10.
         color normal; // Default to the color green.
         color cleared; // Background is black.
+        int hp;
+        circle_t hitBox;
 
     public:
         player();
@@ -58,6 +62,10 @@ class player
         int getStep() const;
         color getNormalColor() const;
         color getClearedColor() const;
+        int getHP() const;
+        circle_t getHitBox() const;
+
+        void hurt();
 
         // ---Display helpers---
 
