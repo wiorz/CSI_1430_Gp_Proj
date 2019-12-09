@@ -16,6 +16,9 @@ player::player()
     step = DEFAULTSTEP;
     normal = GREENCOLOR;
     cleared = BLACKCOLOR;
+    hp = DEFAULTHP;
+    hitBox.setCenter(point(WIDTH/2, HEIGHT - UNITSIZE));
+    hitBox.setRadius(UNITSIZE / 2);
 }
 
 player::player(SDL_Plotter& g, int stepSize)
@@ -32,6 +35,11 @@ player::player(SDL_Plotter& g, int stepSize)
     step = stepSize;
     normal = GREENCOLOR;
     cleared = BLACKCOLOR;
+    hp = DEFAULTHP;
+
+    hitBox.setCenter(point((body.getUpperLeft().x + UNITSIZE / 2 + 20),
+                           head.getLowerRight().y));
+    hitBox.setRadius(UNITSIZE );
 }
 
 player::player(const rectangle_t& rec)
@@ -48,6 +56,7 @@ player::player(const rectangle_t& rec)
     step = DEFAULTSTEP;
     normal = rec.getColor();
     cleared = BLACKCOLOR;
+    hp = DEFAULTHP;
 }
 
 player::player(const rectangle_t& rec, int stepVal)
@@ -64,6 +73,7 @@ player::player(const rectangle_t& rec, int stepVal)
     step = stepVal;
     normal = rec.getColor();
     cleared = BLACKCOLOR;
+    hp = DEFAULTHP;
 }
 
 player::player(const rectangle_t& rec, int stepVal, color bodyColor,
@@ -81,6 +91,7 @@ player::player(const rectangle_t& rec, int stepVal, color bodyColor,
     step = stepVal;
     normal = bodyColor;
     cleared = clearedColor;
+    hp = DEFAULTHP;
 }
 
 // Mutators
@@ -137,6 +148,24 @@ color player::getNormalColor() const
 color player::getClearedColor() const
 {
     return cleared;
+}
+
+int player::getHP() const
+{
+    return hp;
+}
+
+circle_t player::getHitBox() const
+{
+    return hitBox;
+}
+
+void player::hurt()
+{
+    if(!(hp <= 0))
+    {
+        hp--;
+    }
 }
 
 
@@ -219,6 +248,9 @@ void player::movePlayerByNSteps(const int val)
     head.setLowerRight(point(prevHeadLR.x + val * step, prevHeadLR.y));
     point prevHeadUL = head.getUpperLeft();
     head.setUpperLeft(point(prevHeadUL.x + val * step, prevHeadUL.y));
+
+    hitBox.setCenter(point((body.getUpperLeft().x + UNITSIZE / 2 + 20),
+                           head.getLowerRight().y));
 
     return;
 }

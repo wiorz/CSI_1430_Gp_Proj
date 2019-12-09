@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
 		alien_group aG(g, SPEED);
 		alien_t ally(point(1, 1), SPEED);
         vector<bullet_t> playerBTVect, alienBTVect;
+        int tmpTimeSec;
 		option = menu();
 		clock_t startTime = clock();
 		while (option == 2 || option == 3) {
@@ -99,8 +100,10 @@ int main(int argc, char* argv[])
                     }
                 }
             }
-
-            if(static_cast<int>(currTime - startTime) % 150 == 149)
+            tmpTimeSec = static_cast<int>(currTime - startTime)/
+                                                    CLOCKS_PER_SEC;
+            //cout << "seconds: " << tmpTimeSec << endl;
+            if(static_cast<int>(currTime - startTime) % 60 == 1)
             {
                 aG.undraw(g);
                 if(rand() % 10 == 1 || rand() % 10 == 2)
@@ -179,7 +182,10 @@ int main(int argc, char* argv[])
 					if (55 - alien_t::totalCount < 35)
 						ally.undraw(g);
                 }
-            collid2(aG, playerBTVect, g, cout);
+
+            collid2KillPlayer(p, alienBTVect, g, cout);
+            collid2KillAlien(aG, playerBTVect, g, cout);
+
             if(playerBTVect.size())
             {
                 playerBTVect.at(0).draw(g);
