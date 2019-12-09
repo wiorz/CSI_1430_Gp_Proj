@@ -1,4 +1,5 @@
 // Worked on this on 11/13 Wednesday, and 11/15 Friday
+// test commit
 
 #include <iostream>
 #include <time.h>
@@ -11,27 +12,45 @@
 #include "player.h"
 #include "alien.h"
 #include "alien_group.h"
+#include <fstream>
 #include "bullet.h"
 
 using namespace std;
 
 const int WINDOWSWIDTH = 1080;
 const int WINDOWSHEIGHT = 720;
-const int SPEED = 10;
+const int SPEED = 15;
+
+int menu();
+int credits();
+int ScoreBoard();
+void setScore(int);
 
 int main(int argc, char* argv[])
 {
-    SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
-    srand(time(0));
-    char key;
-    player p(g, SPEED);
-    alien_group aG(g, SPEED);
+	int option;
+	do {
+		option = 0;
+		SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
+		srand(time(0));
+		char key;
+		player p(g, SPEED);
+		alien_group aG(g, SPEED);
     vector<bullet_t> playerBTVect;
+		option = menu();
+		clock_t startTime = clock();
+		while (option == 2 || option == 3) {
+			if (option == 2)
+				option = credits();
+			else if (option == 3)
+				option = ScoreBoard();
+			else if ((option != 2 && option != 3) || isdigit(option) == false)
+				break;
+		}
 
-    clock_t startTime = clock();
+		while(!g.getQuit() && option == 1) {
+		    g.initSound("Tetris.mp3");
 
-    while(!g.getQuit())
-    {
         clock_t currTime = clock();
 
         // Move player bullet
@@ -59,176 +78,182 @@ int main(int argc, char* argv[])
             aG.moveAliensByNSteps(g, 1);
             aG.draw(g);
         }
+			if(g.kbhit())
+			{
 
-        if(g.kbhit())
-        {
+				cout << alien_t::totalCount << endl;
+				g.playSound("clear.wav");
+				key = g.getKey();
 
-            key = g.getKey();
+				// Steps to update:
+				// 1. Delete the last object by resetting them to background color
+				// 2. Update coordinates of objects
+				// 3. Draw updated object.
 
-            // Steps to update:
-            // 1. Delete the last object by resetting them to background color
-            // 2. Update coordinates of objects
-            // 3. Draw updated object.
-
-            // Step 1.
-            // "Erase" previous rectangle by setting it to background color
-            // Shows nothing with any key input.
-            p.undraw(g);
-
-            // Step 2.
-            // Update coordinates
-
-            switch(toupper(key))
-            {
-
-                case RIGHT_ARROW:
-                    if(p.getBodyRectangle().getLowerRight().x
-                       < WINDOWSWIDTH)
-                    {
-                        p.movePlayerByNSteps(1);
-                    }
-                    break;
-                case LEFT_ARROW:
-                    if(p.getBodyRectangle().getUpperLeft().x > 0)
-                    {
-                        p.movePlayerByNSteps(-1);
-                    }
-                    break;
-                case UP_ARROW:
-                    p.fire(playerBTVect);
-                    break;
-                case DOWN_ARROW:
-                    aG.removeAlienAtIndex(g, 0);
-                    break;
-
-            }
-
-            // Steps 3.
-            // Draw the updated rectangle
-            // Important to reset color to what we want here.
-            p.draw(g);
-
-        }
-
-        if(playerBTVect.size())
-        {
-            playerBTVect.at(0).draw(g);
-        }
+				// Step 1.
+				// "Erase" previous rectangle by setting it to background color
+				// Shows nothing with any key input.
+				p.undraw(g);
 
 
+				// Step 2.
+				// Update coordinates
+
+				switch(toupper(key))
+				{
+
+					case RIGHT_ARROW:
+						if(p.getBodyRectangle().getLowerRight().x
+						   < WINDOWSWIDTH)
+						{
+							p.movePlayerByNSteps(1);
+						}
+
+						break;
+					case LEFT_ARROW:
+						if(p.getBodyRectangle().getUpperLeft().x > 0)
+						{
+							p.movePlayerByNSteps(-1);
+						}
+						break;
+					case UP_ARROW:
+            p.fire(playerBTVect);
+						break;
+					case DOWN_ARROW:
+						break;
+					case ' ':
+						break;
+				}
+
+				// Steps 3.
+				// Draw the updated rectangle
+				// Important to reset color to what we want here.
+				p.draw(g);
+			}
+
+      if(playerBTVect.size())
+      {
+          playerBTVect.at(0).draw(g);
+      }
 
 
-        g.update();
-    }
-
-    // Clean up
-    SDL_Quit();
-    return 0;
+			g.update();
+		}
+		// Clean up
+		SDL_Quit();
+		if (option != 4)
+			setScore(55 - alien_t::totalCount);
+	} while (option != 4);
+	return 0;
 }
 
-/*
-Old code to draw random lines:
-SDL_Plotter g(500, 500);
-    srand(time(0));
-    int count = 0;
-    point p;
-    p.x = 99;
-    p.y = 11;
-
-    point p2;
-    p.x = 250;
-    p.y = 250;
-
-    line myLine(p, p2);
-    p.display(cout);
-    p2.display(cout);
-    myLine.display(cout);
-
-    p.display(cout);
-
-    while(!g.getQuit())
-    {
-        if(g.kbhit())
-        {
-            char Key = g.getKey();
-        }
-        p.x += -1 + rand()%3;
-        p.y += -1 + rand()%3;
-        if(count >= 1025)
-        {
-            cout << p.c.R << " " << p.c.G << " " << p.c.B << endl;
-            if(p.c.R < 255)
-            {
-                p.c.R += 1;
-            } else if (p.c.G < 255)
-            {
-                p.c.G += 1;
-            } else if(p.c.B < 255)
-            {
-                p.c.B += 1;
-            } else
-            {
-                p.c.R = 0;
-                p.c.G = 0;
-                p.c.B = 0;
-
-            }
-            myLine.setPointTwo(point(rand() % 500, rand() % 500));
-            count = 0;
-        }
-        p.draw(g);
-        p2.draw(g);
-        myLine.setPointOne(point(rand() % 500, rand() % 500));
-        myLine.setColor(color(rand() % 256, rand() % 256, rand() % 256));
-        myLine.draw(g);
-        count++;
-        g.update();
-
-*/
-
-/*
-// To draw random circles:
-int main(int argc, char* argv[])
-{
-    SDL_Plotter g(1000, 1000);
-    g.initSound("Honk.wav"); //to get sound
-    srand(time(0));
-    int count = 0;
-    // rectangle_t box[100]; The commented out part is for drawing rectangles.
-    circle_t ball[99];
-         for(int i = 0; i < 99; i++)
-    {
-        ball[i].setCenter(point(rand() % g.getCol(), rand() % g.getRow()));
-        ball[i].setRadius(rand() % 100);
-        ball[i].setColor(color(rand()% 256, rand()% 256, rand()% 256));
-    }
-
-    while(!g.getQuit())
-    {
-        if(g.kbhit())
-        {
-            char Key = g.getKey();
-            switch(Key)
-            { case 'P':
-                g.playSound("Honk.wav");
-                break;
-            }
-        }
-
-        for(int i = 0; i < 99; i++)
-        {
-            ball[i].draw(g);
-            // g.update(); // Flush out the buffer each time.
-        }
-
-        g.update();
-        for(int i = 0; i < 99; i++)
-        {
-            ball[i].setCenter(point(rand() % g.getCol(), rand() % g.getRow()));
-            ball[i].setRadius(rand() % 100);
-            ball[i].setColor(color(rand()% 256, rand()% 256, rand()% 256));
-        }
-
-    }
+int menu() {
+	int entry;
+	string name;
+	cout << "Space Invaders Ripoff \n\n"
+		 << "1. Start\n\n"
+		 << "2. Credits\n\n"
+		 << "3. ScoreBoard\n\n"
+		 << "4. quit game\n\n";
+		cin >> name;
+		do {
+			if (name == "1") {
+				entry = 1;
+				break;
+			}
+			else if (name == "2") {
+				entry = 2;
+				break;
+			}
+			else if (name == "3") {
+				entry = 3;
+				break;
+			}
+			else if (name == "4") {
+				entry = 4;
+				break;
+			}
+			cout << "Only integers allowed\n";
+			cin >> name;
+			cout << endl;
+		} while (name != "1" || name != "2" || name != "3" || name != "4");
+		return entry;
 }
-*/
+
+int credits() {
+	int entry;
+	string name;
+	cout << "CREDITS:\n\n"
+		 << "Ivan Ko: created the player, the enemies and the bullets\n\n"
+		 << "Yi Ding: did Collision, scoring system, menu\n\n"
+		 << "Third person: dunno\n\n"
+		 << "select the menu option you desire\n\n";
+	cin >> name;
+	do {
+		if (name == "1") {
+			entry = 1;
+			break;
+		}
+		else if (name == "2") {
+			entry = 2;
+			break;
+		}
+		else if (name == "3") {
+			entry = 3;
+			break;
+		}
+		else if (name == "4") {
+			entry = 4;
+			break;
+		}
+		cout << "Only integers allowed\n";
+		cin >> name;
+		cout << endl;
+	} while (name != "1" || name != "2" || name != "3" || name != "4");
+	return entry;
+}
+int ScoreBoard() {
+	ifstream in;
+	string name;
+	int entry;
+	in.open("SCOREBOARD");
+	cout << endl;
+	while(getline(in, name)) {
+		cout << name << endl;
+	}
+	in.close();
+	cout << endl << "select the menu option you desire\n\n";
+	cin >> name;
+	do {
+		if (name == "1") {
+			entry = 1;
+			break;
+		}
+		else if (name == "2") {
+			entry = 2;
+			break;
+		}
+		else if (name == "3") {
+			entry = 3;
+			break;
+		}
+		else if (name == "4") {
+			entry = 4;
+			break;
+		}
+		cout << "Only integers allowed\n";
+		cin >> name;
+		cout << endl;
+	} while (name != "1" || name != "2" || name != "3" || name != "4");
+	return entry;
+}
+void setScore(int n) {
+	ofstream out;
+	string str;
+	out.open("SCOREBOARD", std::ios_base::app);
+	cout << "INPUT YOUR NAME (~10 characters)\n\n";
+	cin >> str;
+	cout << endl;
+	out << str << '\t' << 1000 * n << endl;
+	out.close();
+}

@@ -6,6 +6,7 @@
 #include "color.h"
 #include "bullet.h"
 #include "SDL_Plotter.h"
+#include "alien.h"
 
 const int UNITSIZE = 20;
 const int WIDTH = 1080;
