@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <time.h>
+#include <vector>
 #include "SDL_Plotter.h"
 #include "point.h"
 #include "line.h"
@@ -10,6 +11,7 @@
 #include "player.h"
 #include "alien.h"
 #include "alien_group.h"
+#include "bullet.h"
 
 using namespace std;
 
@@ -24,6 +26,7 @@ int main(int argc, char* argv[])
     char key;
     player p(g, SPEED);
     alien_group aG(g, SPEED);
+    vector<bullet_t> playerBTVect;
 
     clock_t startTime = clock();
 
@@ -31,12 +34,30 @@ int main(int argc, char* argv[])
     {
         clock_t currTime = clock();
 
+        // Move player bullet
+        if(playerBTVect.size())
+        {
+            playerBTVect.at(0).undraw(g);
+        }
+
+        // Handle Bullet boundary and collision.
+        if(playerBTVect.size())
+        {
+            if(playerBTVect.at(0).getCenterTopPos().y <= 0)
+            {
+                playerBTVect.at(0).kill();
+                playerBTVect.erase(playerBTVect.begin());
+            } else
+            {
+                playerBTVect.at(0).moveByNStepsInYCoord(-1);
+            }
+        }
+
         if(static_cast<int>(currTime - startTime) % 150 == 149)
         {
             aG.undraw(g);
             aG.moveAliensByNSteps(g, 1);
             aG.draw(g);
-
         }
 
         if(g.kbhit())
@@ -54,7 +75,6 @@ int main(int argc, char* argv[])
             // Shows nothing with any key input.
             p.undraw(g);
 
-
             // Step 2.
             // Update coordinates
 
@@ -67,7 +87,6 @@ int main(int argc, char* argv[])
                     {
                         p.movePlayerByNSteps(1);
                     }
-
                     break;
                 case LEFT_ARROW:
                     if(p.getBodyRectangle().getUpperLeft().x > 0)
@@ -76,8 +95,10 @@ int main(int argc, char* argv[])
                     }
                     break;
                 case UP_ARROW:
+                    p.fire(playerBTVect);
                     break;
                 case DOWN_ARROW:
+                    aG.removeAlienAtIndex(g, 0);
                     break;
 
             }
@@ -87,6 +108,11 @@ int main(int argc, char* argv[])
             // Important to reset color to what we want here.
             p.draw(g);
 
+        }
+
+        if(playerBTVect.size())
+        {
+            playerBTVect.at(0).draw(g);
         }
 
 

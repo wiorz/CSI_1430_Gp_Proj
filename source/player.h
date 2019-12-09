@@ -1,8 +1,10 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
+#include <vector>
 #include "rectangle.h"
 #include "color.h"
+#include "bullet.h"
 #include "SDL_Plotter.h"
 
 const int UNITSIZE = 20;
@@ -79,7 +81,7 @@ class player
 
         // TODO maybe change this to return a bullet object?
         // bomb? power up? shield? HP?
-        void fire();
+        void fire(vector<bullet_t>&);
 
 };
 

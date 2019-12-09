@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <ostream>
-#include "line.h"
 #include "circle.h"
 #include "alien.h"
 #include "SDL_Plotter.h"
@@ -27,7 +26,9 @@ class alien_group
 
         void moveAliensByNSteps(SDL_Plotter&, const int);
 
-        void removeAlienAtIndex(const int);
+        void removeAlienAtIndex(SDL_Plotter&, const int);
+
+        void fireAtIndex(const int);
 
         void draw(SDL_Plotter&);
 

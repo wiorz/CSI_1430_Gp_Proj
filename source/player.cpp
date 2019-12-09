@@ -13,13 +13,6 @@ player::player()
                              HEIGHT - UNITSIZE *1.5));
     head.setUpperLeft(point(WIDTH/2 - UNITSIZE * 0.5,
                             HEIGHT - UNITSIZE * 2.0));
-//    body.setLowerRight(point(WIDTH/2 + UNITSIZE * 1.5, HEIGHT));
-//    body.setUpperLeft(point(WIDTH/2 - UNITSIZE * 1.5,
-//                            HEIGHT - UNITSIZE));
-//    head.setLowerRight(point(WIDTH/2 + UNITSIZE * 0.5,
-//                             HEIGHT - UNITSIZE));
-//    head.setUpperLeft(point(WIDTH/2 - UNITSIZE * 0.5,
-//                            HEIGHT - UNITSIZE * 1.5));
     step = DEFAULTSTEP;
     normal = GREENCOLOR;
     cleared = BLACKCOLOR;
@@ -230,8 +223,14 @@ void player::movePlayerByNSteps(const int val)
     return;
 }
 
-void player::fire()
+void player::fire(vector<bullet_t>& btVec)
 {
-    return;
+    if(!btVec.size())
+    {
+        int xpos = (head.getUpperLeft().x + head.getLowerRight().x)/ 2;
+        btVec.push_back(bullet_t(point(xpos, head.getUpperLeft().y - UNITSIZE),
+                                 UNITSIZE / 3, step / 5));
+    }
+
 }
 

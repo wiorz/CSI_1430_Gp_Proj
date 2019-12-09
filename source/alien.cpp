@@ -140,3 +140,14 @@ void alien_t::draw(SDL_Plotter& g)
 
 }
 
+void alien_t::fire(vector<bullet_t>& btVec)
+{
+    if(!btVec.size())
+    {
+        int ypos = centerPos.y + radius;
+        btVec.push_back(bullet_t(point(centerPos.x, ypos),
+                                 radius / 4, step / 8));
+    }
+
+}
+

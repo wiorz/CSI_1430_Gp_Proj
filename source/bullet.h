@@ -1,61 +1,42 @@
-#ifndef ALIEN_H_INCLUDED
-#define ALIEN_H_INCLUDED
+#ifndef BULLET_H_INCLUDED
+#define BULLET_H_INCLUDED
 
-#include <vector>
 #include "point.h"
-#include "color.h"
+#include "line.h"
 #include "circle.h"
-#include "bullet.h"
-#include "SDL_Plotter.h"
+#include "rectangle.h"
 
-const double DEFAULTUNITSIZE = 15;
-
-class alien_t
+class bullet_t
 {
     private:
-        point centerPos;
-        double radius;
+        point centerTopPos;
+        double hbRadius;
         int step;
         color normal;
         color cleared;
         bool isAlive;
         circle_t hitBox;
+        rectangle_t shape;
 
     public:
-        alien_t();
-
         /*
         Use this as default constructor.
         Sends in a point for center, and int for speed.
         Everything else should be handled automatically.
         */
-        alien_t(point, int);
-
-        // ---Static members---
-
-        // Useful to see total number
-        static int totalCount;
+        bullet_t(point, double, int);
 
         // ---Mutators---
 
-        void setCenterPos(point);
-        void setRadius(double);
+        void setCenterTopPos(point);
+        void setHBRadius(double);
         void setStepSize(int);
         void setNormalColor(color);
         void setClearedColor(color);
+        void setShapeFromPoint(point);
 
         /*
-        Necromancy is prohibited! Created for testing only.
-        Note: also increment totalCount, based on the assumption that kill
-        has decremented totalCount.
-        */
-        void makeAlive();
-
-        /*
-        Kill it ded.
-        Should also decrement totalCount besides invoking undraw().
-        The alien still "exists" but cannot be hit.
-        The alienGroup will be responsible for removing the dead alien.
+        Kill it.
         */
         void kill();
 
@@ -75,20 +56,19 @@ class alien_t
         // --- Getters---
 
 
-        point getCenterPos() const;
-        double getRadius() const;
+        point getCenterTopPos() const;
+        double getHBRadius() const;
         int getStepSize()const;
         color getNormalColor() const;
         color getClearedColor() const;
         bool getIsAlive() const;
         circle_t getHitBox() const;
+        rectangle_t getShape() const;
 
         // ---Display helpers---
         void undraw(SDL_Plotter&);
         void draw(SDL_Plotter&);
-
-        void fire(vector<bullet_t>&);
-
 };
 
-#endif // ALIEN_H_INCLUDED
+
+#endif // BULLET_H_INCLUDED

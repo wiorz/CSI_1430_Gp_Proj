@@ -27,15 +27,18 @@ void alien_group::moveAliensByNSteps(SDL_Plotter& g, const int val)
     int currXPosLeft;
     int currXPosRight;
     bool changedDirection = false;
+    double currRadius;
     point currCenter;
 
     for(unsigned int i = 0; i < aliens.size() && !changedDirection; i++)
     {
         // Check if an alien reaches left boundary
         currCenter = aliens.at(i).getCenterPos();
-        currXPosLeft = currCenter.x - aliens.at(i).getRadius();
-        currXPosRight = currCenter.x + aliens.at(i).getRadius();
-        if(currXPosLeft <= 0 || currXPosRight >= g.getCol())
+        currRadius = aliens.at(i).getRadius();
+        currXPosLeft = currCenter.x - currRadius;
+        currXPosRight = currCenter.x + currRadius;
+        if(currXPosLeft - currRadius <= 0 ||
+           currXPosRight + currRadius >= g.getCol())
         {
             direction *= -1; // Reverse direction
             changedDirection = true;
@@ -50,16 +53,21 @@ void alien_group::moveAliensByNSteps(SDL_Plotter& g, const int val)
 
         if(changedDirection)
         {
-            aliens.at(i).moveByNStepsInYCoord(val * 2.5);
+            aliens.at(i).moveByNStepsInYCoord(val * 3);
         }
 
         aliens.at(i).moveByNStepsInXCoord(val * direction);
     }
 }
 
-void alien_group::removeAlienAtIndex(const int index)
+void alien_group::removeAlienAtIndex(SDL_Plotter& g, const int index)
 {
-    aliens.erase(aliens.begin() + index);
+    if(aliens.size())
+    {
+        aliens.at(index).kill();
+        aliens.at(index).undraw(g);
+        aliens.erase(aliens.begin() + index);
+    }
 }
 
 void alien_group::draw(SDL_Plotter& g)
