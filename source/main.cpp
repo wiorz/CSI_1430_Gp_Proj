@@ -46,6 +46,7 @@ int main(int argc, char* argv[])
 		}
 
 		while(!g.getQuit() && option == 1) {
+		g.initSound("Tetris.mp3");
 
         clock_t currTime = clock();
 
@@ -59,7 +60,7 @@ int main(int argc, char* argv[])
 			{
 
 				cout << alien_t::totalCount << endl;
-
+				g.playSound("clear.wav");
 				key = g.getKey();
 
 				// Steps to update:
