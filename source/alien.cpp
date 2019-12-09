@@ -31,6 +31,7 @@ int alien_t::totalCount = 0;
 void alien_t::setCenterPos(point p)
 {
     centerPos = p;
+    hitBox.setCenter(centerPos);
 }
 
 void alien_t::setRadius(double r)
@@ -112,6 +113,11 @@ color alien_t::getClearedColor() const
 bool alien_t::getIsAlive() const
 {
     return isAlive;
+}
+
+circle_t alien_t::getHitBox() const
+{
+    return hitBox;
 }
 
 // TODO: draw base on something else, NOT from hitbox.
