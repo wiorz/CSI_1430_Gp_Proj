@@ -4,6 +4,8 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#include <fstream>
+#include <sstream>
 #include "SDL_Plotter.h"
 #include "point.h"
 #include "line.h"
@@ -12,7 +14,6 @@
 #include "player.h"
 #include "alien.h"
 #include "alien_group.h"
-#include <fstream>
 #include "bullet.h"
 #include "collision.h"
 
@@ -35,6 +36,7 @@ int main(int argc, char* argv[])
 		SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
 		srand(time(0));
 		char key;
+		bool quit = false;
 		player p(g, SPEED);
 		alien_group aG(g, SPEED);
         vector<bullet_t> playerBTVect, alienBTVect;
@@ -50,7 +52,7 @@ int main(int argc, char* argv[])
 				break;
 		}
 
-		while(!g.getQuit() && option == 1)
+		while(!g.getQuit() && option == 1 && quit == false)
         {
 		    //g.initSound("Tetris.mp3");
 
@@ -112,10 +114,17 @@ int main(int argc, char* argv[])
                 aG.moveAliensByNSteps(g, 1);
                 aG.draw(g);
             }
-                if(g.kbhit())
+			if (p.getHP() == 1) {
+				p.setNormalColor(REDCOLOR);
+			}
+			if (p.getHP() == 0 || aG.getAlienGroupSize() == 0 ) {
+				quit = true;
+				cout << "you lost\n Your Score: ";
+			}
+				if(g.kbhit())
                 {
 
-                    cout << alien_t::totalCount << endl;
+                    //cout << alien_t::totalCount << endl;
                     //g.playSound("clear.wav");
                     key = g.getKey();
 
@@ -156,6 +165,12 @@ int main(int argc, char* argv[])
                         case DOWN_ARROW:
                             break;
                         case ' ':
+							bool pause = true;
+							while (pause) {
+								g.Sleep(100);
+								if (g.kbhit())
+									pause = false;
+							}
                             break;
                     }
 
@@ -187,8 +202,10 @@ int main(int argc, char* argv[])
 		}
 		// Clean up
 		SDL_Quit();
-		if (option != 4)
+		if (option != 4) {
+			cout << (55 - alien_t::totalCount) * 1000 << endl;
 			setScore(55 - alien_t::totalCount);
+		}
 	} while (option != 4);
 	return 0;
 }
@@ -230,9 +247,10 @@ int credits() {
 	int entry;
 	string name;
 	cout << "CREDITS:\n\n"
-		 << "Ivan Ko: created the player, the enemies and the bullets\n\n"
-		 << "Yi Ding: did Collision, scoring system, menu\n\n"
-		 << "Third person: dunno\n\n"
+		 << "Ivan Ko: created the player, the enemies and the bullets and"
+		 << "did 2nd Collision and HP\n\n"
+		 << "Yi Ding: did 1st Collision, scoring system, menu and player HP\n\n"
+		 << "Third person: never showed up, did nothing\n\n"
 		 << "select the menu option you desire\n\n";
 	cin >> name;
 	do {
@@ -262,12 +280,27 @@ int ScoreBoard() {
 	ifstream in;
 	string name;
 	int entry;
+	vector<string> names;
+	vector<int> scores;
 	in.open("SCOREBOARD");
 	cout << endl;
 	while(getline(in, name)) {
-		cout << name << endl;
+	istringstream iss (name);
+	iss >> name >> entry;
+	scores.push_back(entry);
+	names.push_back(name);
 	}
 	in.close();
+	for (int i = 0; i < scores.size() - 1; i++) {
+		for (int j = 0; j < scores.size() - i - 1; j++) {
+			if (scores[j] < scores[j + 1])
+				swap(scores[j], scores[j + 1]);
+			if (names[j] < names[j + 1])
+				swap(names[j], names[j + 1]);
+		}
+	}
+	for (int i = 0; i < scores.size(); i++)
+		cout << names[i] << " " << scores[i] << endl;
 	cout << endl << "select the menu option you desire\n\n";
 	cin >> name;
 	do {

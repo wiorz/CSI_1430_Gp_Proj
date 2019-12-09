@@ -91,16 +91,35 @@ void alien_group::fireAtIndex(vector<bullet_t>& btVec, const int agIndex)
 
 void alien_group::draw(SDL_Plotter& g)
 {
-    for(unsigned int i = 0; i < aliens.size(); i++)
-    {
-        aliens.at(i).draw(g);
-    }
+    for(unsigned int i = 0; i < aliens.size(); i++) {
+		//for(unsigned int j = 0; j < aliens.size(); j++) {
+			//for(unsigned int z = 0; z < aliens.size(); z++) {
+				aliens.at(i).draw(g);
+				/*
+				if (a[z][j] > 0)
+					g.plotPixel(aliens[i].getCenterPos().x + j,
+						aliens[i].getCenterPos().y + z, 0, 0, 0);
+				else {
+					g.plotPixel(aliens[i].getCenterPos().x + j,
+						aliens[i].getCenterPos().y + z, 0, 250, 0);
+				}
+			}
+		}
+		*/
+	}
 }
 
 void alien_group::undraw(SDL_Plotter& g)
 {
-    for(unsigned int i = 0; i < aliens.size(); i++)
-    {
-        aliens.at(i).undraw(g);
-    }
+    for(unsigned int i = 0; i < aliens.size(); i++) {
+		//for(unsigned int j = 0; j < aliens.size(); j++) {
+			//for(unsigned int z = 0; z < aliens.size(); z++) {
+				aliens.at(i).undraw(g);
+				/*
+					g.plotPixel(aliens[i].getCenterPos().x + j,
+						aliens[i].getCenterPos().y + z, 0, 0, 0);
+			}
+		}
+		*/
+	}
 }
