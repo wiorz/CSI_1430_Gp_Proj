@@ -15,12 +15,13 @@ const int DEFAULTCOLSIZE = 11;
 class alien_group
 {
     private:
-        vector<alien_t> aliens;
         // 1 = right, -1 = left;
         int direction;
 
     public:
         alien_group(SDL_Plotter&, const int);
+
+        vector<alien_t> aliens;
 
         void setDirection(const int);
 

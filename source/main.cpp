@@ -89,14 +89,13 @@ int main(int argc, char* argv[])
                 {
                     if(alienBTVect.at(i).getCenterTopPos().y >= 720)
                     {
-                        alienBTVect.at(0).
+                        alienBTVect.at(i).
                         killAndRemoveFromBTVector(alienBTVect, i);
                     } else
                     {
                         alienBTVect.at(i).moveByNStepsInYCoord(1);
                     }
                 }
-
             }
 
             if(static_cast<int>(currTime - startTime) % 150 == 149)
@@ -162,8 +161,7 @@ int main(int argc, char* argv[])
                     // Important to reset color to what we want here.
                     p.draw(g);
                 }
-				collid(aG, playerBTVect, aG.getAlienGroupSize(),
-						playerBTVect.size(), g);
+            collid2(aG, playerBTVect, g, cout);
             if(playerBTVect.size())
             {
                 playerBTVect.at(0).draw(g);
