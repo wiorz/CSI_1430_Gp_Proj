@@ -72,12 +72,14 @@ class alien_t
 
         // --- Getters---
 
+
         point getCenterPos() const;
         double getRadius() const;
         int getStepSize()const;
         color getNormalColor() const;
         color getClearedColor() const;
         bool getIsAlive() const;
+        circle_t getHitBox() const;
 
         // ---Display helpers---
         void undraw(SDL_Plotter&);

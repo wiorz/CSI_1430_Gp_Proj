@@ -2,7 +2,7 @@
 // test commit
 
 #include <iostream>
-#include <ctime>
+#include <time.h>
 #include "SDL_Plotter.h"
 #include "point.h"
 #include "line.h"
@@ -10,7 +10,11 @@
 #include "circle.h"
 #include "player.h"
 #include "alien.h"
+<<<<<<< HEAD
 #include <fstream>
+=======
+#include "alien_group.h"
+>>>>>>> master
 
 using namespace std;
 
@@ -24,6 +28,7 @@ int ScoreBoard();
 
 int main(int argc, char* argv[])
 {
+<<<<<<< HEAD
 	int option;
 	do {
 		SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
@@ -134,6 +139,83 @@ int main(int argc, char* argv[])
 	} while (option != 4);
 	return 0;
 }
+=======
+    SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
+    srand(time(0));
+    char key;
+    player p(g, SPEED);
+    alien_group aG(g, SPEED);
+
+    clock_t startTime = clock();
+
+    while(!g.getQuit())
+    {
+        clock_t currTime = clock();
+
+        if(static_cast<int>(currTime - startTime) % 150 == 149)
+        {
+            aG.undraw(g);
+            aG.moveAliensByNSteps(g, 1);
+            aG.draw(g);
+
+        }
+
+        if(g.kbhit())
+        {
+
+            key = g.getKey();
+
+            // Steps to update:
+            // 1. Delete the last object by resetting them to background color
+            // 2. Update coordinates of objects
+            // 3. Draw updated object.
+
+            // Step 1.
+            // "Erase" previous rectangle by setting it to background color
+            // Shows nothing with any key input.
+            p.undraw(g);
+
+
+            // Step 2.
+            // Update coordinates
+
+            switch(toupper(key))
+            {
+
+                case RIGHT_ARROW:
+                    if(p.getBodyRectangle().getLowerRight().x
+                       < WINDOWSWIDTH)
+                    {
+                        p.movePlayerByNSteps(1);
+                    }
+
+                    break;
+                case LEFT_ARROW:
+                    if(p.getBodyRectangle().getUpperLeft().x > 0)
+                    {
+                        p.movePlayerByNSteps(-1);
+                    }
+                    break;
+                case UP_ARROW:
+                    break;
+                case DOWN_ARROW:
+                    break;
+
+            }
+
+            // Steps 3.
+            // Draw the updated rectangle
+            // Important to reset color to what we want here.
+            p.draw(g);
+
+        }
+
+
+
+
+        g.update();
+    }
+>>>>>>> master
 
 int menu() {
 	int entry;
