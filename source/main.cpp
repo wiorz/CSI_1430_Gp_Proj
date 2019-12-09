@@ -54,7 +54,8 @@ int main(int argc, char* argv[])
 
 		while(!g.getQuit() && option == 1 && quit == false)
         {
-		    //g.initSound("Tetris.mp3");
+		    g.initSound("clear.wav");
+		    g.initSound("bleeeat.wav");
 
             clock_t currTime = clock();
 
@@ -124,8 +125,9 @@ int main(int argc, char* argv[])
 				if(g.kbhit())
                 {
 
+
                     //cout << alien_t::totalCount << endl;
-                    //g.playSound("clear.wav");
+
                     key = g.getKey();
 
                     // Steps to update:
@@ -180,8 +182,8 @@ int main(int argc, char* argv[])
                     p.draw(g);
                 }
 
-            collid2KillPlayer(p, alienBTVect, g, cout);
-            collid2KillAlien(aG, playerBTVect, g, cout);
+            collid2KillPlayer(p, alienBTVect, g);
+            collid2KillAlien(aG, playerBTVect, g);
 
             if(playerBTVect.size())
             {
