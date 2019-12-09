@@ -10,6 +10,9 @@
 #include <cmath>
 #include <ostream>
 
+/*
+
+*/
 bool circleIntersect(circle_t, circle_t);
 
 void collid(alien_group, vector<bullet_t>&, int, int, SDL_Plotter&);

@@ -43,6 +43,12 @@ int main(int argc, char* argv[])
         int tmpTimeSec;
 		option = menu();
 		clock_t startTime = clock();
+
+		// init sound
+		g.initSound("clear.wav");
+        g.initSound("clock-chimes.wav");
+        g.initSound("Summer Joe hisaishi copy.wav");
+
 		//menu options for credits and scoreboard
 		while (option == 2 || option == 3) {
 			if (option == 2)
@@ -55,8 +61,7 @@ int main(int argc, char* argv[])
 
 		while(!g.getQuit() && option == 1 && quit == false)
         {
-		    g.initSound("clear.wav");
-		    g.initSound("bleeeat.wav");
+
 
             clock_t currTime = clock();
 
@@ -104,7 +109,7 @@ int main(int argc, char* argv[])
             }
             tmpTimeSec = static_cast<int>(currTime - startTime)/
                                                     CLOCKS_PER_SEC;
-            //cout << "seconds: " << tmpTimeSec << endl;
+
             if(static_cast<int>(currTime - startTime) % 60 == 1)
             {
                 aG.undraw(g);
@@ -125,64 +130,66 @@ int main(int argc, char* argv[])
 				quit = true;
 				cout << "you loss\n Your Score: ";
 			}
-				if(g.kbhit())
+
+
+
+            if(g.kbhit())
+            {
+                key = g.getKey();
+
+                // Steps to update:
+                // 1. Delete the last object by resetting them
+                // to background color
+                // 2. Update coordinates of objects
+                // 3. Draw updated object.
+
+                // Step 1.
+                // "Erase" previous rectangle by setting it
+                // to background color
+                // Shows nothing with any key input.
+                p.undraw(g);
+
+
+                // Step 2.
+                // Update coordinates
+
+                switch(toupper(key))
                 {
 
-                    key = g.getKey();
+                    case RIGHT_ARROW:
+                        if(p.getBodyRectangle().getLowerRight().x
+                           < WINDOWSWIDTH)
+                        {
+                            p.movePlayerByNSteps(1);
+                        }
 
-                    // Steps to update:
-                    // 1. Delete the last object by resetting them
-					// to background color
-                    // 2. Update coordinates of objects
-                    // 3. Draw updated object.
-
-                    // Step 1.
-                    // "Erase" previous rectangle by setting it
-					// to background color
-                    // Shows nothing with any key input.
-                    p.undraw(g);
-
-
-                    // Step 2.
-                    // Update coordinates
-
-                    switch(toupper(key))
-                    {
-
-                        case RIGHT_ARROW:
-                            if(p.getBodyRectangle().getLowerRight().x
-                               < WINDOWSWIDTH)
-                            {
-                                p.movePlayerByNSteps(1);
-                            }
-
-                            break;
-                        case LEFT_ARROW:
-                            if(p.getBodyRectangle().getUpperLeft().x > 0)
-                            {
-                                p.movePlayerByNSteps(-1);
-                            }
-                            break;
-                        case UP_ARROW:
-                            p.fire(playerBTVect);
-                            break;
-                        case DOWN_ARROW:
-                            break;
-                        case ' ':
-							bool pause = true;
-							while (pause) {
-								g.Sleep(100);
-								if (g.kbhit())
-									pause = false;
-							}
-                            break;
-                    }
-
-                    // Steps 3.
-                    // Draw the updated rectangle
-                    // Important to reset color to what we want here.
-                    p.draw(g);
+                        break;
+                    case LEFT_ARROW:
+                        if(p.getBodyRectangle().getUpperLeft().x > 0)
+                        {
+                            p.movePlayerByNSteps(-1);
+                        }
+                        break;
+                    case UP_ARROW:
+                        p.fire(playerBTVect);
+                        break;
+                    case DOWN_ARROW:
+                        break;
+                    case ' ':
+                        bool pause = true;
+                        while (pause) {
+                            g.Sleep(100);
+                            if (g.kbhit())
+                                pause = false;
+                        }
+                        break;
                 }
+
+                // Steps 3.
+                // Draw the updated rectangle
+                // Important to reset color to what we want here.
+                p.draw(g);
+            }
 
 			//Governs the collision
             collid2KillPlayer(p, alienBTVect, g);

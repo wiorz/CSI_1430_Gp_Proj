@@ -27,7 +27,7 @@ void collid(alien_group v, vector<bullet_t>& b, int n, int bullA,
 }
 
 void collid2KillAlien(alien_group& aG, vector<bullet_t>& btVec,
-		SDL_Plotter& g, ostream& os)
+		SDL_Plotter& g)
 {
     if(btVec.size())
     {
@@ -36,15 +36,16 @@ void collid2KillAlien(alien_group& aG, vector<bullet_t>& btVec,
 
             for(unsigned int j = 0; j < aG.getAlienGroupSize(); j++)
             {
+                // Turn off bullet
                 if (btVec.at(0).getIsAlive() == false)
                 {
-                    //os << "dead bullet" << endl;
                     break;
                 }
                 if (circleIntersect(aG.getAlienAtIndex(j).getHitBox(),
                                     btVec.at(0).getHitBox()))
                 {
-                    //os << "hit" << endl;
+                    g.playSound("clear.wav");
+                    g.playSound("Summer Joe hisaishi copy.wav");
                     aG.removeAlienAtIndex(g, j);
                     btVec.at(0).kill();
                 }
@@ -58,7 +59,7 @@ void collid2KillAlien(alien_group& aG, vector<bullet_t>& btVec,
 }
 
 void collid2KillPlayer(player& p, vector<bullet_t>& btVec,
-		SDL_Plotter& g, ostream& os)
+		SDL_Plotter& g)
 {
     int index;
     bool isHit = false;
@@ -67,9 +68,9 @@ void collid2KillPlayer(player& p, vector<bullet_t>& btVec,
 
         for(unsigned int i = 0; i < btVec.size(); i++)
         {
+            // Turn off bullet
             if (btVec.at(i).getIsAlive() == false)
             {
-                //os << "dead bullet" << endl;
                 break;
             }
 
@@ -79,6 +80,7 @@ void collid2KillPlayer(player& p, vector<bullet_t>& btVec,
                 btVec.at(i).kill();
                 index = i;
                 isHit = true;
+                g.playSound("clock-chimes.wav");
             }
         }
 
