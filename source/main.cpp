@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 		char key;
 		player p(g, SPEED);
 		alien_group aG(g, SPEED);
-    vector<bullet_t> playerBTVect;
+        vector<bullet_t> playerBTVect;
 		option = menu();
 		clock_t startTime = clock();
 		while (option == 2 || option == 3) {
@@ -48,93 +48,94 @@ int main(int argc, char* argv[])
 				break;
 		}
 
-		while(!g.getQuit() && option == 1) {
-		    g.initSound("Tetris.mp3");
-
-        clock_t currTime = clock();
-
-        // Move player bullet
-        if(playerBTVect.size())
+		while(!g.getQuit() && option == 1)
         {
-            playerBTVect.at(0).undraw(g);
-        }
+		    //g.initSound("Tetris.mp3");
 
-        // Handle Bullet boundary and collision.
-        if(playerBTVect.size())
-        {
-            if(playerBTVect.at(0).getCenterTopPos().y <= 0)
+            clock_t currTime = clock();
+
+            // Move player bullet
+            if(playerBTVect.size())
             {
-                playerBTVect.at(0).kill();
-                playerBTVect.erase(playerBTVect.begin());
-            } else
-            {
-                playerBTVect.at(0).moveByNStepsInYCoord(-1);
+                playerBTVect.at(0).undraw(g);
             }
-        }
 
-        if(static_cast<int>(currTime - startTime) % 150 == 149)
-        {
-            aG.undraw(g);
-            aG.moveAliensByNSteps(g, 1);
-            aG.draw(g);
-        }
-			if(g.kbhit())
-			{
+            // Handle Bullet boundary and collision.
+            if(playerBTVect.size())
+            {
+                if(playerBTVect.at(0).getCenterTopPos().y <= 0)
+                {
+                    playerBTVect.at(0).kill();
+                    playerBTVect.erase(playerBTVect.begin());
+                } else
+                {
+                    playerBTVect.at(0).moveByNStepsInYCoord(-1);
+                }
+            }
 
-				cout << alien_t::totalCount << endl;
-				g.playSound("clear.wav");
-				key = g.getKey();
+            if(static_cast<int>(currTime - startTime) % 150 == 149)
+            {
+                aG.undraw(g);
+                aG.moveAliensByNSteps(g, 1);
+                aG.draw(g);
+            }
+                if(g.kbhit())
+                {
 
-				// Steps to update:
-				// 1. Delete the last object by resetting them to background color
-				// 2. Update coordinates of objects
-				// 3. Draw updated object.
+                    cout << alien_t::totalCount << endl;
+                    //g.playSound("clear.wav");
+                    key = g.getKey();
 
-				// Step 1.
-				// "Erase" previous rectangle by setting it to background color
-				// Shows nothing with any key input.
-				p.undraw(g);
+                    // Steps to update:
+                    // 1. Delete the last object by resetting them to background color
+                    // 2. Update coordinates of objects
+                    // 3. Draw updated object.
+
+                    // Step 1.
+                    // "Erase" previous rectangle by setting it to background color
+                    // Shows nothing with any key input.
+                    p.undraw(g);
 
 
-				// Step 2.
-				// Update coordinates
+                    // Step 2.
+                    // Update coordinates
 
-				switch(toupper(key))
-				{
+                    switch(toupper(key))
+                    {
 
-					case RIGHT_ARROW:
-						if(p.getBodyRectangle().getLowerRight().x
-						   < WINDOWSWIDTH)
-						{
-							p.movePlayerByNSteps(1);
-						}
+                        case RIGHT_ARROW:
+                            if(p.getBodyRectangle().getLowerRight().x
+                               < WINDOWSWIDTH)
+                            {
+                                p.movePlayerByNSteps(1);
+                            }
 
-						break;
-					case LEFT_ARROW:
-						if(p.getBodyRectangle().getUpperLeft().x > 0)
-						{
-							p.movePlayerByNSteps(-1);
-						}
-						break;
-					case UP_ARROW:
-            p.fire(playerBTVect);
-						break;
-					case DOWN_ARROW:
-						break;
-					case ' ':
-						break;
-				}
+                            break;
+                        case LEFT_ARROW:
+                            if(p.getBodyRectangle().getUpperLeft().x > 0)
+                            {
+                                p.movePlayerByNSteps(-1);
+                            }
+                            break;
+                        case UP_ARROW:
+                            p.fire(playerBTVect);
+                            break;
+                        case DOWN_ARROW:
+                            break;
+                        case ' ':
+                            break;
+                    }
 
-				// Steps 3.
-				// Draw the updated rectangle
-				// Important to reset color to what we want here.
-				p.draw(g);
-			}
+                    // Steps 3.
+                    // Draw the updated rectangle
+                    // Important to reset color to what we want here.
+                    p.draw(g);
+                }
 
-      if(playerBTVect.size())
-      {
-          playerBTVect.at(0).draw(g);
-      }
+            if(playerBTVect.size())
+            {
+                playerBTVect.at(0).draw(g);
+            }
 
 
 			g.update();

@@ -37,7 +37,7 @@
 	"point.h"
 	"SDL_Plotter.h"
 
-1575237975 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\rectangle.cpp
+1575879761 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\rectangle.cpp
 	"rectangle.h"
 
 1575172853 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\rectangle.h
@@ -62,18 +62,19 @@
 	"alien_group.h"
 	"bullet.h"
 
-1575879036 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.cpp
+1575879753 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.cpp
 	"player.h"
 	<ostream>
 
-1575877376 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.h
+1575879761 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\player.h
 	<vector>
 	"rectangle.h"
 	"color.h"
 	"bullet.h"
 	"SDL_Plotter.h"
+	"alien.h"
 
-1575879076 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien.h
+1575879753 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien.h
 	<vector>
 	"point.h"
 	"color.h"
@@ -81,24 +82,23 @@
 	"bullet.h"
 	"SDL_Plotter.h"
 
-1575879230 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien.cpp
+1575879753 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien.cpp
 	"alien.h"
 
-1575873450 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien_group.cpp
+1575879753 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien_group.cpp
 	"alien_group.h"
 
-1575870665 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien_group.h
+1575879753 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\alien_group.h
 	<vector>
 	<ostream>
-	"line.h"
 	"circle.h"
 	"alien.h"
 	"SDL_Plotter.h"
 
-1575877317 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\bullet.cpp
+1575879753 source:c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\bullet.cpp
 	"bullet.h"
 
-1575877853 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\bullet.h
+1575879753 c:\users\koesl\documents\code\csi1430\csi_1430_gp_proj\source\bullet.h
 	"point.h"
 	"line.h"
 	"circle.h"
