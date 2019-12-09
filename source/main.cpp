@@ -118,12 +118,6 @@ int main(int argc, char* argv[])
             if((tmpTimeSec * 60) > 0)
             {
                 aG.undraw(g);
-                if(rand() % 10 == 1 || rand() % 10 == 2)
-                {
-                    aG.fireAtIndex(alienBTVect,
-                                   rand() % aG.getAlienGroupSize());
-                }
-
 
                 //sets player color when hit once
                 if (p.getHP() == 1) {
@@ -191,6 +185,14 @@ int main(int argc, char* argv[])
                     // Draw the updated rectangle
                     // Important to reset color to what we want here.
                     p.draw(g);
+                }
+
+                if(rand() % 10 == 1 || rand() % 10 == 2)
+                {
+                    // Empty loop for speed control.
+                    for(int i = 0; i < 1000; i++){};
+                    aG.fireAtIndex(alienBTVect,
+                                   rand() % aG.getAlienGroupSize());
                 }
 
                 //Governs the collision

@@ -42,59 +42,6 @@ player::player(SDL_Plotter& g, int stepSize)
     hitBox.setRadius(UNITSIZE );
 }
 
-player::player(const rectangle_t& rec)
-{
-    body = rec;
-    // Make head relative to the mid point of body.
-    point bodyLR = body.getLowerRight();
-    point bodyUL = body.getUpperLeft();
-    int headMidX = (bodyLR.x + bodyUL.x) / 2;
-    int headLowerY = bodyUL.y;
-    head.setLowerRight(point(headMidX + UNITSIZE * 0.5, headLowerY));
-    head.setUpperLeft(point(headMidX - UNITSIZE * 0.5,
-                            headLowerY + UNITSIZE * 0.5));
-    step = DEFAULTSTEP;
-    normal = rec.getColor();
-    cleared = BLACKCOLOR;
-    hp = DEFAULTHP;
-}
-
-player::player(const rectangle_t& rec, int stepVal)
-{
-    body = rec;
-    // Make head relative to the mid point of body.
-    point bodyLR = body.getLowerRight();
-    point bodyUL = body.getUpperLeft();
-    int headMidX = (bodyLR.x + bodyUL.x) / 2;
-    int headLowerY = bodyUL.y;
-    head.setLowerRight(point(headMidX + UNITSIZE * 0.5, headLowerY));
-    head.setUpperLeft(point(headMidX - UNITSIZE * 0.5,
-                            headLowerY + UNITSIZE * 0.5));
-    step = stepVal;
-    normal = rec.getColor();
-    cleared = BLACKCOLOR;
-    hp = DEFAULTHP;
-}
-
-player::player(const rectangle_t& rec, int stepVal, color bodyColor,
-               color clearedColor)
-{
-    body = rec;
-    // Make head relative to the mid point of body.
-    point bodyLR = body.getLowerRight();
-    point bodyUL = body.getUpperLeft();
-    int headMidX = (bodyLR.x + bodyUL.x) / 2;
-    int headLowerY = bodyUL.y;
-    head.setLowerRight(point(headMidX + UNITSIZE * 0.5, headLowerY));
-    head.setUpperLeft(point(headMidX - UNITSIZE * 0.5,
-                            headLowerY + UNITSIZE * 0.5));
-    step = stepVal;
-    normal = bodyColor;
-    cleared = clearedColor;
-    hp = DEFAULTHP;
-}
-
-// Mutators
 void player::setBodyRectangle(const rectangle_t& rec)
 {
     body = rec;
