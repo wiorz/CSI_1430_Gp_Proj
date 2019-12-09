@@ -150,4 +150,3 @@ void alien_t::fire(vector<bullet_t>& btVec)
     }
 
 }
-

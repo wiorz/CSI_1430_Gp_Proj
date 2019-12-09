@@ -4,6 +4,8 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#include <fstream>
+#include <sstream>
 #include "SDL_Plotter.h"
 #include "point.h"
 #include "line.h"
@@ -12,7 +14,6 @@
 #include "player.h"
 #include "alien.h"
 #include "alien_group.h"
-#include <fstream>
 #include "bullet.h"
 #include "collision.h"
 
@@ -37,6 +38,7 @@ int main(int argc, char* argv[])
 		char key;
 		player p(g, SPEED);
 		alien_group aG(g, SPEED);
+		alien_t ally(point(1, 1), SPEED);
         vector<bullet_t> playerBTVect, alienBTVect;
 		option = menu();
 		clock_t startTime = clock();
@@ -109,6 +111,14 @@ int main(int argc, char* argv[])
                 aG.moveAliensByNSteps(g, 1);
                 aG.draw(g);
             }
+			if (55 - alien_t::totalCount > 35) {
+				int direction = 1, switchD = -1;
+				if (ally.getCenterPos().x > 1050 || ally.getCenterPos().x < 30)
+					direction *= switchD;
+				ally.draw(g);
+				ally.moveByNStepsInXCoord(direction * 15);
+			}
+			if (p.
                 if(g.kbhit())
                 {
 
@@ -153,6 +163,12 @@ int main(int argc, char* argv[])
                         case DOWN_ARROW:
                             break;
                         case ' ':
+							bool pause = true;
+							while (pause) {
+								g.Sleep(100);
+								if (g.kbhit())
+									pause = false;
+							}
                             break;
                     }
 
@@ -160,6 +176,8 @@ int main(int argc, char* argv[])
                     // Draw the updated rectangle
                     // Important to reset color to what we want here.
                     p.draw(g);
+					if (55 - alien_t::totalCount < 35)
+						ally.undraw(g);
                 }
             collid2(aG, playerBTVect, g, cout);
             if(playerBTVect.size())
@@ -226,7 +244,7 @@ int credits() {
 	cout << "CREDITS:\n\n"
 		 << "Ivan Ko: created the player, the enemies and the bullets\n\n"
 		 << "Yi Ding: did Collision, scoring system, menu\n\n"
-		 << "Third person: dunno\n\n"
+		 << "Third person: never showed up\n\n"
 		 << "select the menu option you desire\n\n";
 	cin >> name;
 	do {
@@ -256,12 +274,27 @@ int ScoreBoard() {
 	ifstream in;
 	string name;
 	int entry;
+	vector<string> names;
+	vector<int> scores;
 	in.open("SCOREBOARD");
 	cout << endl;
 	while(getline(in, name)) {
-		cout << name << endl;
+	istringstream iss (name);
+	iss >> name >> entry;
+	scores.push_back(entry);
+	names.push_back(name);
 	}
 	in.close();
+	for (int i = 0; i < scores.size() - 1; i++) {
+		for (int j = 0; j < scores.size() - i - 1; j++) {
+			if (scores[j] < scores[j + 1])
+				swap(scores[j], scores[j + 1]);
+			if (names[j] < names[j + 1])
+				swap(names[j], names[j + 1]);
+		}
+	}
+	for (int i = 0; i < scores.size(); i++)
+		cout << names[i] << " " << scores[i] << endl;
 	cout << endl << "select the menu option you desire\n\n";
 	cin >> name;
 	do {
