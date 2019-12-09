@@ -2,7 +2,7 @@
 // test commit
 
 #include <iostream>
-#include <ctime>
+#include <time.h>
 #include "SDL_Plotter.h"
 #include "point.h"
 #include "line.h"
@@ -10,6 +10,7 @@
 #include "circle.h"
 #include "player.h"
 #include "alien.h"
+#include "alien_group.h"
 
 using namespace std;
 
@@ -23,14 +24,24 @@ int main(int argc, char* argv[])
     srand(time(0));
     char key;
     player p(g, SPEED);
-    alien_t a1(point(g.getCol()/2, g.getRow()/2), SPEED);
+    alien_group aG(g, SPEED);
+
+    clock_t startTime = clock();
 
     while(!g.getQuit())
     {
+        clock_t currTime = clock();
+
+        if(static_cast<int>(currTime - startTime) % 150 == 149)
+        {
+            aG.undraw(g);
+            aG.moveAliensByNSteps(g, 1);
+            aG.draw(g);
+
+        }
+
         if(g.kbhit())
         {
-
-            cout << alien_t::totalCount << endl;
 
             key = g.getKey();
 
@@ -78,6 +89,8 @@ int main(int argc, char* argv[])
             p.draw(g);
 
         }
+
+
 
 
         g.update();
