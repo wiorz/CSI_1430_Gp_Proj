@@ -14,6 +14,7 @@
 #include "alien_group.h"
 #include <fstream>
 #include "bullet.h"
+#include "collision.h"
 
 using namespace std;
 
@@ -161,7 +162,8 @@ int main(int argc, char* argv[])
                     // Important to reset color to what we want here.
                     p.draw(g);
                 }
-
+				collid(aG, playerBTVect, aG.getAlienGroupSize(),
+						playerBTVect.size(), g);
             if(playerBTVect.size())
             {
                 playerBTVect.at(0).draw(g);

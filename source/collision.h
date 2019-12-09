@@ -8,19 +8,17 @@
 #include "bullet.h"
 #include <cmath>
 
-void collid(vector<alien_group>&, vector<bullet_t>&, int, int, SDL_Plotter&);
+void collid(alien_group, vector<bullet_t>&, int, int, SDL_Plotter&);
 
-void collid(vector<alien_group>& v, vector<bullet_t>& b, int n, int bullA, SDL_Plotter& g) {
+void collid(alien_group v, vector<bullet_t>& b, int n, int bullA, SDL_Plotter& g) {
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < bullA; j++) {
-			cout << i << ": " << abs(v[i].getCenterPos().x - b[j].getCenter().x)
-				 << " " << v[i].getRadius() + b[j].getR();
-			if (abs(v[i].getCenterPos.x - b[j].getCenter().x)
-					< v[i].getRadius() + b[j].getR()) {
-				v[i].removeAlienAtIndex(i);
-				g.initSound("clear.wav");
-				g.playSound("clear.wav");
-			}
+			if (b[j].getIsAlive() == false)
+				break;
+			if (abs(v.getAlienAtIndex(i).getCenterPos().x -
+					b[j].getCenterTopPos().x)
+					< v.getAlienAtIndex(i).getRadius() + b[j].getHBRadius())
+				v.removeAlienAtIndex(g, i);
 		}
 	}
 }

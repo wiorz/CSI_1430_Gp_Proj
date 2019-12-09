@@ -21,7 +21,6 @@ void alien_group::setDirection(const int val)
 {
     direction = val;
 }
-
 vector<alien_t>& alien_group::getAlienGroupVect()
 {
     return aliens;
