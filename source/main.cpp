@@ -12,7 +12,6 @@
 #include "alien.h"
 #include "alien_group.h"
 #include <fstream>
-#include <cctype>
 
 using namespace std;
 
@@ -23,11 +22,13 @@ const int SPEED = 15;
 int menu();
 int credits();
 int ScoreBoard();
+void setScore(int);
 
 int main(int argc, char* argv[])
 {
 	int option;
 	do {
+		option = 0;
 		SDL_Plotter g(WINDOWSHEIGHT, WINDOWSWIDTH);
 		srand(time(0));
 		char key;
@@ -109,9 +110,10 @@ int main(int argc, char* argv[])
 
 			g.update();
 		}
-
 		// Clean up
 		SDL_Quit();
+		if (option != 4)
+			setScore(55 - alien_t::totalCount);
 	} while (option != 4);
 	return 0;
 }
@@ -215,4 +217,14 @@ int ScoreBoard() {
 		cout << endl;
 	} while (name != "1" || name != "2" || name != "3" || name != "4");
 	return entry;
+}
+void setScore(int n) {
+	ofstream out;
+	string str;
+	out.open("SCOREBOARD", std::ios_base::app);
+	cout << "INPUT YOUR NAME (~10 characters)\n\n";
+	cin >> str;
+	cout << endl;
+	out << str << '\t' << 1000 * n << endl;
+	out.close();
 }
