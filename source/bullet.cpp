@@ -50,6 +50,13 @@ void bullet_t::kill()
     isAlive = false;
 }
 
+void bullet_t::killAndRemoveFromBTVector(vector<bullet_t>& btVec,
+                                         const int index)
+{
+    btVec.at(index).kill();
+    btVec.erase(btVec.begin() + index);
+}
+
 void bullet_t::moveByNStepsInXCoord(int numSteps)
 {
     centerTopPos.x += numSteps * step;

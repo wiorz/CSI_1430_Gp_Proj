@@ -24,11 +24,17 @@ class alien_group
 
         void setDirection(const int);
 
+        vector<alien_t>& getAlienGroupVect();
+
+        unsigned int getAlienGroupSize() const;
+
+        alien_t getAlienAtIndex(const int);
+
         void moveAliensByNSteps(SDL_Plotter&, const int);
 
         void removeAlienAtIndex(SDL_Plotter&, const int);
 
-        void fireAtIndex(const int);
+        void fireAtIndex(vector<bullet_t>&, const int);
 
         void draw(SDL_Plotter&);
 

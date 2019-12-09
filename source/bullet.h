@@ -1,6 +1,7 @@
 #ifndef BULLET_H_INCLUDED
 #define BULLET_H_INCLUDED
 
+#include <vector>
 #include "point.h"
 #include "line.h"
 #include "circle.h"
@@ -39,6 +40,8 @@ class bullet_t
         Kill it.
         */
         void kill();
+
+        void killAndRemoveFromBTVector(vector<bullet_t>&, const int);
 
         /*
         Offset center position by n steps.

@@ -229,7 +229,7 @@ void player::fire(vector<bullet_t>& btVec)
     {
         int xpos = (head.getUpperLeft().x + head.getLowerRight().x)/ 2;
         btVec.push_back(bullet_t(point(xpos, head.getUpperLeft().y - UNITSIZE),
-                                 UNITSIZE / 3, step / 5));
+                                 UNITSIZE / 3, 2));
     }
 
 }

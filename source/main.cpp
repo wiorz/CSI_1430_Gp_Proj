@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 		char key;
 		player p(g, SPEED);
 		alien_group aG(g, SPEED);
-        vector<bullet_t> playerBTVect;
+        vector<bullet_t> playerBTVect, alienBTVect;
 		option = menu();
 		clock_t startTime = clock();
 		while (option == 2 || option == 3) {
@@ -60,22 +60,52 @@ int main(int argc, char* argv[])
                 playerBTVect.at(0).undraw(g);
             }
 
+            if(alienBTVect.size())
+            {
+                for(unsigned int i = 0; i < alienBTVect.size(); i++)
+                {
+                    alienBTVect.at(i).undraw(g);
+                }
+
+            }
+
             // Handle Bullet boundary and collision.
             if(playerBTVect.size())
             {
                 if(playerBTVect.at(0).getCenterTopPos().y <= 0)
                 {
-                    playerBTVect.at(0).kill();
-                    playerBTVect.erase(playerBTVect.begin());
+                    playerBTVect.at(0).
+                    killAndRemoveFromBTVector(playerBTVect, 0);
                 } else
                 {
                     playerBTVect.at(0).moveByNStepsInYCoord(-1);
                 }
             }
 
+            if(alienBTVect.size())
+            {
+                for(unsigned int i = 0; i < alienBTVect.size(); i++)
+                {
+                    if(alienBTVect.at(i).getCenterTopPos().y >= 720)
+                    {
+                        alienBTVect.at(0).
+                        killAndRemoveFromBTVector(alienBTVect, i);
+                    } else
+                    {
+                        alienBTVect.at(i).moveByNStepsInYCoord(1);
+                    }
+                }
+
+            }
+
             if(static_cast<int>(currTime - startTime) % 150 == 149)
             {
                 aG.undraw(g);
+                if(rand() % 10 == 1 || rand() % 10 == 2)
+                {
+                    aG.fireAtIndex(alienBTVect,
+                                   rand() % aG.getAlienGroupSize());
+                }
                 aG.moveAliensByNSteps(g, 1);
                 aG.draw(g);
             }
@@ -135,6 +165,15 @@ int main(int argc, char* argv[])
             if(playerBTVect.size())
             {
                 playerBTVect.at(0).draw(g);
+            }
+
+            if(alienBTVect.size())
+            {
+                for(unsigned int i = 0; i < alienBTVect.size(); i++)
+                {
+                    alienBTVect.at(i).draw(g);
+                }
+
             }
 
 

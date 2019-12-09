@@ -22,6 +22,21 @@ void alien_group::setDirection(const int val)
     direction = val;
 }
 
+vector<alien_t>& alien_group::getAlienGroupVect()
+{
+    return aliens;
+}
+
+unsigned int alien_group::getAlienGroupSize() const
+{
+    return aliens.size();
+}
+
+alien_t alien_group::getAlienAtIndex(const int index)
+{
+    return (aliens.at(index));
+}
+
 void alien_group::moveAliensByNSteps(SDL_Plotter& g, const int val)
 {
     int currXPosLeft;
@@ -68,6 +83,11 @@ void alien_group::removeAlienAtIndex(SDL_Plotter& g, const int index)
         aliens.at(index).undraw(g);
         aliens.erase(aliens.begin() + index);
     }
+}
+
+void alien_group::fireAtIndex(vector<bullet_t>& btVec, const int agIndex)
+{
+    aliens.at(agIndex).fire(btVec);
 }
 
 void alien_group::draw(SDL_Plotter& g)
