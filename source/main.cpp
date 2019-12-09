@@ -43,6 +43,7 @@ int main(int argc, char* argv[])
         int tmpTimeSec;
 		option = menu();
 		clock_t startTime = clock();
+		//menu options for credits and scoreboard
 		while (option == 2 || option == 3) {
 			if (option == 2)
 				option = credits();
@@ -86,7 +87,7 @@ int main(int argc, char* argv[])
                     playerBTVect.at(0).moveByNStepsInYCoord(-1);
                 }
             }
-
+			//Aliens shooting at player
             if(alienBTVect.size())
             {
                 for(unsigned int i = 0; i < alienBTVect.size(); i++)
@@ -115,28 +116,29 @@ int main(int argc, char* argv[])
                 aG.moveAliensByNSteps(g, 1);
                 aG.draw(g);
             }
+			//sets player color when hit once
 			if (p.getHP() == 1) {
 				p.setNormalColor(REDCOLOR);
 			}
+			//kills player when hit twice or there are no aliens, you cant win
 			if (p.getHP() == 0 || aG.getAlienGroupSize() == 0 ) {
 				quit = true;
-				cout << "you lost\n Your Score: ";
+				cout << "you loss\n Your Score: ";
 			}
 				if(g.kbhit())
                 {
 
-
-                    //cout << alien_t::totalCount << endl;
-
                     key = g.getKey();
 
                     // Steps to update:
-                    // 1. Delete the last object by resetting them to background color
+                    // 1. Delete the last object by resetting them
+					// to background color
                     // 2. Update coordinates of objects
                     // 3. Draw updated object.
 
                     // Step 1.
-                    // "Erase" previous rectangle by setting it to background color
+                    // "Erase" previous rectangle by setting it
+					// to background color
                     // Shows nothing with any key input.
                     p.undraw(g);
 
@@ -182,14 +184,15 @@ int main(int argc, char* argv[])
                     p.draw(g);
                 }
 
+			//Governs the collision
             collid2KillPlayer(p, alienBTVect, g);
             collid2KillAlien(aG, playerBTVect, g);
-
+			//drawing player bullets
             if(playerBTVect.size())
             {
                 playerBTVect.at(0).draw(g);
             }
-
+			//drawing aliens bullets
             if(alienBTVect.size())
             {
                 for(unsigned int i = 0; i < alienBTVect.size(); i++)
@@ -204,6 +207,7 @@ int main(int argc, char* argv[])
 		}
 		// Clean up
 		SDL_Quit();
+		//calculate score
 		if (option != 4) {
 			cout << (55 - alien_t::totalCount) * 1000 << endl;
 			setScore(55 - alien_t::totalCount);
