@@ -30,6 +30,8 @@ const color REDCOLOR(220, 0, 0);
 const color BLACKCOLOR(0, 0, 0);
 const color WHITECOLOR(255, 255, 255);
 const color GREENCOLOR(5, 250, 10);
+const color YELLOWCOLOR(250, 210, 3);
+const color LIGHTBLUECOLOR(102, 153, 250);
 
 
 

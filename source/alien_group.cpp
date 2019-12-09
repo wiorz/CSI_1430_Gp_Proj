@@ -67,7 +67,7 @@ void alien_group::moveAliensByNSteps(SDL_Plotter& g, const int val)
 
         if(changedDirection)
         {
-            aliens.at(i).moveByNStepsInYCoord(val * 3);
+            aliens.at(i).moveByNStepsInYCoord(val * 2.5);
         }
 
         aliens.at(i).moveByNStepsInXCoord(val * direction);

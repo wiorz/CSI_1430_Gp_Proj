@@ -261,7 +261,8 @@ void player::fire(vector<bullet_t>& btVec)
     {
         int xpos = (head.getUpperLeft().x + head.getLowerRight().x)/ 2;
         btVec.push_back(bullet_t(point(xpos, head.getUpperLeft().y - UNITSIZE),
-                                 UNITSIZE / 3, 2));
+                                 UNITSIZE / 3, 9));
+        btVec.at(0).setNormalColor(YELLOWCOLOR);
     }
 
 }

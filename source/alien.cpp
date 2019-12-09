@@ -4,7 +4,7 @@ alien_t::alien_t()
 {
     centerPos = point(10, 10);
     radius = 15.0;
-    normal = GREENCOLOR;
+    normal = LIGHTBLUECOLOR;
     cleared = BLACKCOLOR;
     step = 10;
     isAlive = true;
@@ -17,7 +17,7 @@ alien_t::alien_t()
 alien_t::alien_t(point p, int stepSize):centerPos(p), step(stepSize)
 {
     radius = 15.0;
-    normal = GREENCOLOR;
+    normal = LIGHTBLUECOLOR;
     cleared = BLACKCOLOR;
     isAlive = true;
     hitBox.setCenter(centerPos);
@@ -146,7 +146,7 @@ void alien_t::fire(vector<bullet_t>& btVec)
     {
         int ypos = centerPos.y + radius;
         btVec.push_back(bullet_t(point(centerPos.x, ypos),
-                                 radius / 3, 1));
+                                 radius / 3, 5));
     }
 
 }

@@ -1,5 +1,10 @@
-// Worked on this on 11/13 Wednesday, and 11/15 Friday
-// test commit
+/*
+Author: Ivan Ko, William Ding (Team: GROUP_7 (subgroup))
+Description: Space invaders
+Due Date: 12/9/2019
+Date Created: 11/3/2019
+Date Last Modified: 12/9/2019
+*/
 
 #include <iostream>
 #include <time.h>
@@ -38,7 +43,7 @@ int main(int argc, char* argv[])
 		char key;
 		bool quit = false;
 		player p(g, SPEED);
-		alien_group aG(g, SPEED);
+		alien_group aG(g, SPEED / 2);
         vector<bullet_t> playerBTVect, alienBTVect;
         int tmpTimeSec;
 		option = menu();
@@ -110,7 +115,7 @@ int main(int argc, char* argv[])
             tmpTimeSec = static_cast<int>(currTime - startTime)/
                                                     CLOCKS_PER_SEC;
 
-            if(static_cast<int>(currTime - startTime) % 60 == 1)
+            if((tmpTimeSec * 60) > 0)
             {
                 aG.undraw(g);
                 if(rand() % 10 == 1 || rand() % 10 == 2)
@@ -118,99 +123,103 @@ int main(int argc, char* argv[])
                     aG.fireAtIndex(alienBTVect,
                                    rand() % aG.getAlienGroupSize());
                 }
+
+
+                //sets player color when hit once
+                if (p.getHP() == 1) {
+                    p.setNormalColor(REDCOLOR);
+                }
+                //kills player when hit twice or there are no aliens, you cant win
+                if (p.getHP() == 0 || aG.getAlienGroupSize() == 0 ) {
+                    quit = true;
+                    cout << "you loss\n Your Score: ";
+                }
+
+                if(g.kbhit())
+                {
+                    key = g.getKey();
+
+                    // Steps to update:
+                    // 1. Delete the last object by resetting them
+                    // to background color
+                    // 2. Update coordinates of objects
+                    // 3. Draw updated object.
+
+                    // Step 1.
+                    // "Erase" previous rectangle by setting it
+                    // to background color
+                    // Shows nothing with any key input.
+                    p.undraw(g);
+
+
+                    // Step 2.
+                    // Update coordinates
+
+                    switch(toupper(key))
+                    {
+
+                        case RIGHT_ARROW:
+                            if(p.getBodyRectangle().getLowerRight().x
+                               < WINDOWSWIDTH)
+                            {
+                                p.movePlayerByNSteps(1);
+                            }
+
+                            break;
+                        case LEFT_ARROW:
+                            if(p.getBodyRectangle().getUpperLeft().x > 0)
+                            {
+                                p.movePlayerByNSteps(-1);
+                            }
+                            break;
+                        case UP_ARROW:
+                            p.fire(playerBTVect);
+                            break;
+                        case DOWN_ARROW:
+                            break;
+                        case ' ':
+                            bool pause = true;
+                            while (pause) {
+                                g.Sleep(100);
+                                if (g.kbhit())
+                                    pause = false;
+                            }
+                            break;
+                    }
+
+                    // Steps 3.
+                    // Draw the updated rectangle
+                    // Important to reset color to what we want here.
+                    p.draw(g);
+                }
+
+                //Governs the collision
+                collid2KillPlayer(p, alienBTVect, g);
+                collid2KillAlien(aG, playerBTVect, g);
+                //drawing player bullets
+                if(playerBTVect.size())
+                {
+                    playerBTVect.at(0).draw(g);
+                }
+                //drawing aliens bullets
+                if(alienBTVect.size())
+                {
+                    for(unsigned int i = 0; i < alienBTVect.size(); i++)
+                    {
+                        alienBTVect.at(i).draw(g);
+                    }
+
+                }
+
                 aG.moveAliensByNSteps(g, 1);
                 aG.draw(g);
-            }
-			//sets player color when hit once
-			if (p.getHP() == 1) {
-				p.setNormalColor(REDCOLOR);
-			}
-			//kills player when hit twice or there are no aliens, you cant win
-			if (p.getHP() == 0 || aG.getAlienGroupSize() == 0 ) {
-				quit = true;
-				cout << "you loss\n Your Score: ";
-			}
 
-
-
-            if(g.kbhit())
-            {
-                key = g.getKey();
-
-                // Steps to update:
-                // 1. Delete the last object by resetting them
-                // to background color
-                // 2. Update coordinates of objects
-                // 3. Draw updated object.
-
-                // Step 1.
-                // "Erase" previous rectangle by setting it
-                // to background color
-                // Shows nothing with any key input.
-                p.undraw(g);
-
-
-                // Step 2.
-                // Update coordinates
-
-                switch(toupper(key))
-                {
-
-                    case RIGHT_ARROW:
-                        if(p.getBodyRectangle().getLowerRight().x
-                           < WINDOWSWIDTH)
-                        {
-                            p.movePlayerByNSteps(1);
-                        }
-
-                        break;
-                    case LEFT_ARROW:
-                        if(p.getBodyRectangle().getUpperLeft().x > 0)
-                        {
-                            p.movePlayerByNSteps(-1);
-                        }
-                        break;
-                    case UP_ARROW:
-                        p.fire(playerBTVect);
-                        break;
-                    case DOWN_ARROW:
-                        break;
-                    case ' ':
-                        bool pause = true;
-                        while (pause) {
-                            g.Sleep(100);
-                            if (g.kbhit())
-                                pause = false;
-                        }
-                        break;
-                }
-
-                // Steps 3.
-                // Draw the updated rectangle
-                // Important to reset color to what we want here.
-                p.draw(g);
-            }
-
-			//Governs the collision
-            collid2KillPlayer(p, alienBTVect, g);
-            collid2KillAlien(aG, playerBTVect, g);
-			//drawing player bullets
-            if(playerBTVect.size())
-            {
-                playerBTVect.at(0).draw(g);
-            }
-			//drawing aliens bullets
-            if(alienBTVect.size())
-            {
-                for(unsigned int i = 0; i < alienBTVect.size(); i++)
-                {
-                    alienBTVect.at(i).draw(g);
-                }
+                g.update();
+                tmpTimeSec = 0;
 
             }
 
 
-			g.update();
 		}
 		// Clean up
 		SDL_Quit();
