@@ -54,16 +54,53 @@ class alien_group
         int direction;
 
     public:
+        /*
+        description: constructor
+        return: alien_group
+        precondition: SDL_Plotter exists, has a speed for step size
+        postcondition: constructed the alien_group
+        */
         alien_group(SDL_Plotter&, const int);
 
+        /*
+        description: a vector of alien_t, meant to be private but allocated
+                    as public.
+        return: vector<alien_t>
+        precondition:
+        postcondition: constructed the alien_group
+        */
         vector<alien_t> aliens;
 
+        /*
+        description: set the direction from an int, expect to be 1 or -1.
+        return: none
+        precondition: int is a valid.
+        postcondition: set direction to that int.
+        */
         void setDirection(const int);
 
+        /*
+        description: A reference to the vector<alien_t> aliens
+        return: ref to vector<alien_t>
+        precondition: alien_group is constructed.
+        postcondition: return the reference to the aliens data member.
+        */
         vector<alien_t>& getAlienGroupVect();
 
+        /*
+        description: return the size of the vector<alien_t> as unsigned int.
+        return: unsigned int
+        precondition: alien_group is constructed.
+        postcondition: nothing is changed.
+        */
         unsigned int getAlienGroupSize() const;
 
+        /*
+        description: get the alien_t at index
+        return: alien_t
+        precondition: aliens exists, and the index is valid.
+        postcondition: constructed the alien_group
+        */
         alien_t getAlienAtIndex(const int);
 
         void moveAliensByNSteps(SDL_Plotter&, const int);

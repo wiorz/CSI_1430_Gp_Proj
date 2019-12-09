@@ -10,6 +10,7 @@ CTestTestfile.cmake
 *.cbp
 *.layout
 Debug/
+bin/DeBug/
+bin/
 *.o
-
 out
