@@ -48,7 +48,7 @@ Pull from master.
 5. Work on your branch.
 
 Merging your branch into master:  
-1. Commit your work, remember to comment usage messages.
+1. Commit your work, remember to comment useful messages.
 2. (Optional, if master is updated) "Update from master" (under Branch  
 tab) first, and resolve all conflicts if they exist.  
 3. Push origin to YOUR branch.
