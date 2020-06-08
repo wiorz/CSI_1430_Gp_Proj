@@ -72,6 +72,4 @@ Note: Always select "Bring my changes to *[your branch]*" when
 switching branches.  
 And ALWAYS commit and update your branch first!
 
-
-hey its bret
-hey this is ivan
+Note2: NEVER commit directly to master unless fully tested. Anyone that breaks master will buy everyone lunch.
